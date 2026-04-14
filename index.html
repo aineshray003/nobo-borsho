@@ -174,33 +174,53 @@ opacity:0.9;
 to{transform:translateY(110vh);}
 }
 
-  @media (max-width:768px){
+/* 📱 MOBILE FIX (CLEAN FINAL) */
+
+@media (max-width:768px){
+
+body{
+overflow:auto;
+}
+
+#landing{
+padding-top:35vh;
+}
+
+#greeting{
+padding:20px;
+align-items:center;
+justify-content:center;
+}
 
 .card{
-width:90%;
-padding:25px;
+width:92%;
+max-width:360px;
+padding:22px;
+margin:auto;
 }
 
 .envelope{
-width:110px;
-height:75px;
+width:120px;
+height:80px;
+margin:18px auto;
 }
 
 .intro{
-font-size:16px;
+font-size:15px;
+line-height:1.4;
 }
 
 .message{
-font-size:18px;
+font-size:17px;
 }
 
 .final{
-font-size:24px;
+font-size:22px;
 }
 
 .startBtn{
-font-size:16px;
-padding:12px 22px;
+font-size:15px;
+padding:12px 20px;
 }
 
 h2{
@@ -208,6 +228,7 @@ font-size:20px;
 }
 
 }
+
 </style>
 
 </head>
@@ -322,16 +343,6 @@ setTimeout(()=>{
 document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
-
-/* ✅ FIX: CLOSE ENVELOPE AFTER LAST MESSAGE */
-
-let totalTime = (1500 * ids.length) + 1200;
-
-setTimeout(()=>{
-
-env.classList.remove("open");
-
-}, totalTime);
 
 }
 
