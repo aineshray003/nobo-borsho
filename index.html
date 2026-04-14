@@ -23,7 +23,7 @@ height:100vh;
 overflow:hidden;
 }
 
-/* LANDING PAGE */
+/* LANDING */
 
 #landing{
 position:absolute;
@@ -32,6 +32,7 @@ height:100%;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:flex-start;
 text-align:center;
 
 padding-top:45vh;
@@ -43,7 +44,7 @@ url("landing.jpg");
 background-size:cover;
 background-position:center;
 
-transition:transform 1s ease;
+transition:transform 1s ease, opacity 1s ease;
 }
 
 .zoomOut{
@@ -51,20 +52,7 @@ transform:scale(1.4);
 opacity:0;
 }
 
-/* FADE IN TITLE */
-
-.fadeTitle{
-opacity:0;
-animation:fadeIn 2s ease forwards;
-}
-
-@keyframes fadeIn{
-to{
-opacity:1;
-}
-}
-
-/* GREETING PAGE */
+/* GREETING */
 
 #greeting{
 display:none;
@@ -121,7 +109,6 @@ color:white;
 border:none;
 border-radius:8px;
 cursor:pointer;
-margin-top:15px;
 }
 
 /* ENVELOPE */
@@ -152,7 +139,7 @@ transform-origin:top;
 transform:rotateX(180deg);
 }
 
-/* MESSAGE */
+/* MESSAGES */
 
 .message{
 opacity:0;
@@ -172,18 +159,6 @@ color:#b30000;
 font-weight:700;
 }
 
-/* SHIULI FLOWERS */
-
-.flower{
-position:absolute;
-top:-10px;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-to{transform:translateY(110vh);}
-}
-
 </style>
 
 </head>
@@ -193,19 +168,17 @@ to{transform:translateY(110vh);}
 <audio id="dhaak" src="dhaak.mp3"></audio>
 <audio id="song" src="rabindra.mp3" loop></audio>
 
-<!-- LANDING PAGE -->
+<!-- LANDING -->
 
 <div id="landing">
 
-<h2 class="fadeTitle" style="color:black;">
-নমস্কার  
-<br>
+<h2 style="color:black;">
+নমস্কার<br>
 <span class="eng">(Greetings)</span>
 </h2>
 
 <p style="color:black;">
-পয়লা বৈশাখের ছোট্ট শুভেচ্ছা  
-<br>
+পয়লা বৈশাখের ছোট্ট শুভেচ্ছা<br>
 <span class="eng">(A small Poila Boishakh greeting)</span>
 </p>
 
@@ -215,7 +188,7 @@ Click Here
 
 </div>
 
-<!-- GREETING PAGE -->
+<!-- GREETING -->
 
 <div id="greeting">
 
@@ -223,47 +196,40 @@ Click Here
 
 <div class="intro">
 
-নমস্কার প্রিয়জন  
-<br>
+নমস্কার প্রিয়জন<br>
 <span class="eng">(Nomoshkaar Priyojon)</span>
 
 <br><br>
 
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা  
-<br>
-<span class="eng">(Respect to elders, love to the younger ones)</span>
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br>
+<span class="eng">(Respect to elders, love to younger ones)</span>
 
 </div>
 
 <p class="instruction">
-চিঠিটিতে চাপ দিন  
-<br>
+চিঠিটিতে চাপ দিন<br>
 <span class="eng">(Tap the letter)</span>
 </p>
 
 <div id="env" class="envelope" onclick="openLetter()"></div>
 
 <div id="m1" class="message">
-নতুন আলো আসুক জীবনে  
-<br>
+নতুন আলো আসুক জীবনে<br>
 <span class="eng">(May new light enter your life)</span>
 </div>
 
 <div id="m2" class="message">
-হাসি আর ভালোবাসা থাকুক সবদিন  
-<br>
+হাসি আর ভালোবাসা থাকুক সবদিন<br>
 <span class="eng">(May laughter and love stay always)</span>
 </div>
 
 <div id="m3" class="message">
-স্বপ্নগুলো হোক আরও বড়  
-<br>
+স্বপ্নগুলো হোক আরও বড়<br>
 <span class="eng">(May your dreams grow bigger)</span>
 </div>
 
 <div id="m4" class="message final">
-শুভ নববর্ষ 🌸  
-<br>
+শুভ নববর্ষ 🌸<br>
 <span class="eng">(Shubho Nobo Borsho)</span>
 </div>
 
@@ -273,52 +239,35 @@ Click Here
 
 <script>
 
+let dhaak = document.getElementById("dhaak");
+let song = document.getElementById("song");
+
 let dhaakStarted = false;
 
-function playDhaak(){
+/* MAIN BUTTON */
 
-if(dhaakStarted) return;
+function startGreeting(){
+
+let landing = document.getElementById("landing");
+
+landing.classList.add("zoomOut");
+
+/* START DHAK ONLY ON USER CLICK (FIXES ALL ISSUES) */
+if(!dhaakStarted){
 dhaakStarted = true;
 
 dhaak.currentTime = 275; // 04:35
 dhaak.volume = 0.2;
 
-let playPromise = dhaak.play();
-
-if(playPromise !== undefined){
-playPromise.catch(()=>{
-
-// fallback if browser blocks it
-document.addEventListener("click", resumeDhaakOnce, { once:true });
-
-});
-}
+dhaak.play().catch(()=>{});
 
 setTimeout(fadeDhaak, 3000);
 }
-
-function resumeDhaakOnce(){
-dhaak.play();
-setTimeout(fadeDhaak, 3000);
-}}
-
-/* CLICK BUTTON */
-
-  playDhaak();
-function startGreeting(){
-
-let landing=document.getElementById("landing")
-
-landing.classList.add("zoomOut")
-
-fadeDhaak()
 
 setTimeout(function(){
-
-landing.style.display="none"
-document.getElementById("greeting").style.display="flex"
-
-},900)
+landing.style.display="none";
+document.getElementById("greeting").style.display="flex";
+},900);
 
 }
 
@@ -326,67 +275,53 @@ document.getElementById("greeting").style.display="flex"
 
 function fadeDhaak(){
 
-let fade=setInterval(function(){
+let fade = setInterval(()=>{
 
-if(dhaak.volume>0.02){
-dhaak.volume-=0.02
+if(dhaak.volume > 0.02){
+dhaak.volume -= 0.02;
 }else{
-dhaak.pause()
-clearInterval(fade)
+dhaak.pause();
+clearInterval(fade);
 }
 
-},120)
+},120);
 
 }
 
 /* ENVELOPE */
 
-let opened=false
+let opened = false;
 
 function openLetter(){
 
-if(opened) return
-opened=true
+if(opened) return;
+opened = true;
 
-document.getElementById("env").classList.add("open")
+document.getElementById("env").classList.add("open");
 
-song.currentTime=42
-song.volume=0.35
-song.play()
+/* RABINDRA SANGEET */
+song.currentTime = 42;
+song.volume = 0.35;
+song.play();
 
-let ids=["m1","m2","m3","m4"]
+/* MESSAGE REVEAL */
+let ids = ["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
 
-setTimeout(function(){
+setTimeout(()=>{
 
-document.getElementById(id).classList.add("show")
+document.getElementById(id).classList.add("show");
 
-},1500*(i+1))
+},1500*(i+1));
 
-})
+});
 
-setTimeout(function(){
+setTimeout(()=>{
 
-document.getElementById("env").classList.remove("open")
+document.getElementById("env").classList.remove("open");
 
-},8000)
-
-}
-
-/* SHIULI FLOWERS */
-
-for(let i=0;i<16;i++){
-
-let f=document.createElement("div")
-
-f.className="flower"
-f.innerHTML="🌼"
-
-f.style.left=Math.random()*100+"vw"
-f.style.animationDuration=(5+Math.random()*5)+"s"
-
-document.body.appendChild(f)
+},8000);
 
 }
 
