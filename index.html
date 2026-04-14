@@ -7,7 +7,9 @@
 
 <meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
 <meta property="og:description" content="A small Bengali New Year letter for you 🌸">
-<meta property="og:image" content="preview.jpg">
+<meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
@@ -25,7 +27,7 @@ font-family:'Noto Serif Bengali', serif;
 overflow:hidden;
 }
 
-/* card */
+/* parchment card */
 
 .card{
 background:#fffaf0;
@@ -184,8 +186,6 @@ M80 60 C100 80,120 80,140 60
 M80 140 C100 120,120 120,140 140"/>
 </svg>
 
-<!-- greeting -->
-
 <div class="intro">
 
 নমস্কার প্রিয়জন 🙏  
@@ -202,11 +202,7 @@ M80 140 C100 120,120 120,140 140"/>
 Tap once to open 💌
 </div>
 
-<!-- envelope -->
-
 <div id="env" class="envelope" onclick="startExperience()"></div>
-
-<!-- messages -->
 
 <div id="m1" class="message">
 নতুন আলো আসুক জীবনে  
@@ -248,8 +244,6 @@ song.play()
 musicStarted=true
 }
 
-// auto reveal messages
-
 let msgs=["m1","m2","m3","m4"]
 
 msgs.forEach((id,index)=>{
@@ -266,9 +260,8 @@ document.getElementById("m4").classList.add("zoom")
 
 }
 
-// soften music
-
 function softenMusic(){
+
 let song=document.getElementById("song")
 
 let fade=setInterval(()=>{
@@ -278,9 +271,10 @@ song.volume-=0.02
 clearInterval(fade)
 }
 },300)
+
 }
 
-// shiuli flowers
+/* shiuli flowers */
 
 for(let i=0;i<15;i++){
 let flower=document.createElement("div")
