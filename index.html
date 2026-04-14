@@ -40,7 +40,7 @@ rgba(255,255,255,0.80)
 z-index:0;
 }
 
-/* landing page */
+/* landing */
 
 #landing{
 position:absolute;
@@ -78,7 +78,7 @@ cursor:pointer;
 box-shadow:0 6px 12px rgba(0,0,0,0.3);
 }
 
-/* greeting page */
+/* greeting */
 
 #greeting{
 display:none;
@@ -140,6 +140,8 @@ transition:1s;
 transform:rotateX(180deg);
 }
 
+/* messages */
+
 .message{
 margin-top:14px;
 font-size:20px;
@@ -162,7 +164,7 @@ color:#b22222;
 font-weight:600;
 }
 
-/* falling shiuli flowers */
+/* shiuli */
 
 .flower{
 position:absolute;
@@ -185,11 +187,12 @@ to{transform:translateY(110vh);}
 <audio id="song" src="rabindra.mp3" loop preload="auto"></audio>
 <audio id="dhaak" src="dhaak.mp3" preload="auto"></audio>
 
-<!-- landing screen -->
+<!-- LANDING -->
 
 <div id="landing">
 
 <h1>নমস্কার 🙏</h1>
+
 <p>Ready for some Bengali New Year vibe?</p>
 
 <button class="startBtn" onclick="startGreeting()">
@@ -198,7 +201,7 @@ Click Here
 
 </div>
 
-<!-- greeting page -->
+<!-- GREETING PAGE -->
 
 <div id="greeting">
 
@@ -247,12 +250,52 @@ Tap the letter 💌
 
 <script>
 
-/* landing switch */
+/* DHAK ON LANDING */
+
+let dhaak = document.getElementById("dhaak")
+
+window.addEventListener("load",function(){
+
+dhaak.volume=0.20
+
+dhaak.addEventListener("loadedmetadata",function(){
+
+dhaak.currentTime=275
+dhaak.play()
+
+})
+
+})
+
+/* LANDING → GREETING */
 
 function startGreeting(){
+
+fadeOutDhaak()
+
 document.getElementById("landing").style.display="none"
 document.getElementById("greeting").style.display="flex"
+
 }
+
+/* DHAK FADE */
+
+function fadeOutDhaak(){
+
+let fade=setInterval(function(){
+
+if(dhaak.volume>0.02){
+dhaak.volume-=0.02
+}else{
+dhaak.pause()
+clearInterval(fade)
+}
+
+},120)
+
+}
+
+/* ENVELOPE EXPERIENCE */
 
 let started=false
 
@@ -263,26 +306,12 @@ started=true
 
 let env=document.getElementById("env")
 let song=document.getElementById("song")
-let dhaak=document.getElementById("dhaak")
 
 env.classList.add("open")
-
-/* DHAK STARTS AT 04:35 */
-
-dhaak.volume = 0.20
-
-dhaak.addEventListener("loadedmetadata", function(){
-dhaak.currentTime = 275
-dhaak.play()
-})
-
-/* RABINDRA SANGEET */
 
 song.volume=0.35
 song.currentTime=42
 song.play()
-
-/* messages appear */
 
 let msgs=["m1","m2","m3","m4"]
 
@@ -294,15 +323,13 @@ document.getElementById(id).classList.add("show")
 
 })
 
-/* envelope closes */
-
 setTimeout(()=>{
 env.classList.remove("open")
 },8000)
 
 }
 
-/* shiuli flowers */
+/* SHIULI FLOWERS */
 
 for(let i=0;i<16;i++){
 
