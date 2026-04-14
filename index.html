@@ -277,21 +277,31 @@ function openLetter(){
 if(opened) return;
 opened=true;
 
-document.getElementById("env").classList.add("open");
+const env = document.getElementById("env");
+env.classList.add("open");
 
+/* SOUND */
 paper.play().catch(()=>{});
 
-song.currentTime=42;
-song.volume=0.35;
+song.currentTime = 42;
+song.volume = 0.35;
 song.play();
 
-let ids=["m1","m2","m3","m4"];
+/* SHOW MESSAGES */
+let ids = ["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
 setTimeout(()=>{
 document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
+
+/* ✅ AUTO CLOSE ENVELOPE AFTER EVERYTHING */
+setTimeout(()=>{
+
+env.classList.remove("open");
+
+},8000);
 
 }
 
