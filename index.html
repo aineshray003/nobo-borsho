@@ -270,24 +270,24 @@ else {audio.pause();clearInterval(f);}
 
 /* ENVELOPE */
 
-let opened=false;
+let opened = false;
 
 function openLetter(){
 
 if(opened) return;
-opened=true;
+opened = true;
 
 const env = document.getElementById("env");
 env.classList.add("open");
 
-/* SOUND */
+/* sounds */
 paper.play().catch(()=>{});
 
 song.currentTime = 42;
 song.volume = 0.35;
 song.play();
 
-/* SHOW MESSAGES */
+/* messages */
 let ids = ["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
@@ -296,12 +296,14 @@ document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
 
-/* ✅ AUTO CLOSE ENVELOPE AFTER EVERYTHING */
+/* ✅ CLOSE AFTER LAST MESSAGE (NOT TIMEBASED) */
+let totalDelay = 1500 * ids.length + 1200;
+
 setTimeout(()=>{
 
 env.classList.remove("open");
 
-},8000);
+}, totalDelay);
 
 }
 
