@@ -36,7 +36,6 @@ background-size:cover;
 background-position:center;
 
 color:white;
-transition:opacity 1s ease;
 }
 
 input{
@@ -45,7 +44,7 @@ padding:10px;
 border-radius:8px;
 border:none;
 text-align:center;
-width:200px;
+width:220px;
 }
 
 .startBtn{
@@ -85,7 +84,7 @@ text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* GREETING */
+/* GREETING TEXT */
 .intro{
 font-size:17px;
 color:#000;
@@ -184,14 +183,24 @@ to{transform:translateY(110vh);}
 
 <div class="card">
 
-<div class="intro" id="introText"></div>
+<div class="intro">
+নমস্কার প্রিয়জন<br>
+<span class="eng">(Nomoshkaar Priyojon)</span><br><br>
+
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br>
+<span class="eng">(Respect & love)</span><br><br>
+
+চিঠিটিতে চাপ দিন<br>
+<span class="eng">(Tap the letter)</span>
+</div>
 
 <div class="envelope" id="env" onclick="openLetter()"></div>
 
 <div id="m1" class="msg">নতুন আলো আসুক জীবনে<br>(New light in life)</div>
 <div id="m2" class="msg">হাসি আর ভালোবাসা থাকুক<br>(Happiness & love)</div>
 <div id="m3" class="msg">স্বপ্নগুলো বড় হোক<br>(Bigger dreams)</div>
-<div id="m4" class="msg final">শুভ নববর্ষ 🌸<br>(Happy New Year)</div>
+
+<div id="finalMsg" class="msg final"></div>
 
 </div>
 
@@ -210,12 +219,8 @@ if(input.value.trim()!==""){
 userName=input.value.trim();
 }
 
-document.getElementById("landing").style.opacity="0";
-
-setTimeout(()=>{
 document.getElementById("landing").style.display="none";
 document.getElementById("story").style.display="flex";
-},800);
 
 /* MUSIC */
 song.currentTime=42;
@@ -224,18 +229,6 @@ song.play().catch(()=>{});
 
 /* FLOWERS */
 createFlowers();
-
-/* PERSONALIZED TEXT */
-document.getElementById("introText").innerHTML=`
-নমস্কার ${userName}<br>
-<span class="eng">(Nomoshkaar ${userName})</span><br><br>
-
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br>
-<span class="eng">(Respect & love)</span><br><br>
-
-চিঠিটিতে চাপ দিন<br>
-<span class="eng">(Tap the letter)</span>
-`;
 }
 
 /* FLOWERS */
@@ -267,10 +260,9 @@ if(opened) return;
 opened=true;
 
 const env=document.getElementById("env");
-
 env.classList.add("open");
 
-let msgs=["m1","m2","m3","m4"];
+let msgs=["m1","m2","m3"];
 
 msgs.forEach((id,i)=>{
 setTimeout(()=>{
@@ -278,9 +270,14 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* AUTO CLOSE */
+/* FINAL MESSAGE WITH NAME */
 setTimeout(()=>{
-env.classList.remove("open");
+
+document.getElementById("finalMsg").innerHTML =
+`শুভ নববর্ষ ${userName} 🌸<br>(Happy New Year ${userName})`;
+
+document.getElementById("finalMsg").classList.add("show");
+
 },1200*msgs.length + 1200);
 
 }
