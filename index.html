@@ -38,7 +38,6 @@ background-position:center;
 color:white;
 }
 
-/* ✅ FIX ADDED (ONLY CHANGE) */
 #landing .eng{
 color:white;
 opacity:0.9;
@@ -66,7 +65,7 @@ font-size:16px;
 cursor:pointer;
 }
 
-/* LANDING FOOTER NOTE */
+/* LANDING NOTE */
 .landing-note{
 position:absolute;
 bottom:15px;
@@ -194,13 +193,16 @@ to{transform:translateY(110vh);}
 <div id="landing">
 
 <h2>নমস্কার<br>(Greetings)</h2>
-<p>পয়লা বৈশাখের শুভেচ্ছা</p>
+
+<p>
+আপনি কি পয়েলা বৈশাখের একটি ছোট চমক জন্য প্রস্তুত?<br>
+<span class="eng">(Are you ready for a small surprise of Poila Boishakh?)</span>
+</p>
 
 <input id="nameInput" type="text" placeholder="Enter your name">
 
 <button class="startBtn" onclick="start()">Click Here</button>
 
-<!-- FIXED LANDING NOTE -->
 <div class="landing-note">
 <i>
 Hope you like it. Wishing you a Shubho Nobo Borsho. It is an initial first timer set. If any problem faced, do let me know.
@@ -306,7 +308,7 @@ song.volume=0.35;
 song.currentTime=42;
 song.play().catch(()=>{});
 
-/* OPEN ANIMATION */
+/* OPEN ENVELOPE */
 document.getElementById("env").classList.add("open");
 
 /* MESSAGES */
@@ -317,6 +319,11 @@ setTimeout(()=>{
 document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
+
+/* ✅ CLOSE ENVELOPE AFTER FINAL WORD */
+setTimeout(()=>{
+document.getElementById("env").classList.remove("open");
+},1200*(msgs.length+2));
 
 /* FINAL */
 setTimeout(()=>{
