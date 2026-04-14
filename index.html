@@ -8,15 +8,13 @@
 <meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
 <meta property="og:description" content="A small Bengali New Year letter for you 🌸">
 <meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* background */
+/* Background */
 
 body{
 margin:0;
@@ -30,10 +28,9 @@ overflow:hidden;
 background-image:url("preview.jpg");
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
 }
 
-/* fade overlay */
+/* Fade layer */
 
 body::before{
 content:"";
@@ -42,25 +39,25 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(255,255,255,0.75);
+background:rgba(255,255,255,0.78);
 z-index:0;
 }
 
-/* parchment card */
+/* Card */
 
 .card{
 background:rgba(255,250,240,0.96);
 border:3px solid #b22222;
-box-shadow:0 12px 35px rgba(0,0,0,0.3);
+box-shadow:0 14px 40px rgba(0,0,0,0.35);
 padding:50px;
 width:420px;
 text-align:center;
-border-radius:10px;
+border-radius:12px;
 position:relative;
 z-index:2;
 }
 
-/* alpana */
+/* Alpana */
 
 .alpana{
 position:absolute;
@@ -84,13 +81,13 @@ animation:draw 5s ease forwards;
 to{stroke-dashoffset:0;}
 }
 
-/* shiuli flowers */
+/* Shiuli flowers */
 
 .flower{
 position:absolute;
 top:-10px;
 font-size:16px;
-opacity:0.85;
+opacity:0.9;
 animation:fall linear infinite;
 z-index:1;
 }
@@ -101,7 +98,7 @@ transform:translateY(110vh);
 }
 }
 
-/* text */
+/* Intro text */
 
 .intro{
 font-size:18px;
@@ -111,20 +108,25 @@ margin-bottom:20px;
 .instruction{
 font-size:14px;
 color:#444;
-margin-bottom:10px;
 }
 
-/* envelope */
+/* Velvet envelope */
 
 .envelope{
-width:120px;
-height:80px;
-background:#b22222;
-margin:20px auto;
+width:130px;
+height:85px;
+margin:22px auto;
 position:relative;
 cursor:pointer;
-border-radius:4px;
-transition:transform 0.2s ease;
+
+background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
+border-radius:6px;
+
+box-shadow:
+0 6px 12px rgba(0,0,0,0.35),
+inset 0 2px 4px rgba(255,255,255,0.15);
+
+transition:transform .2s;
 }
 
 .envelope:hover{
@@ -132,29 +134,38 @@ transform:translateY(-4px);
 }
 
 .envelope:active{
-transform:translateY(2px) scale(0.98);
+transform:translateY(2px) scale(.97);
 }
+
+/* Envelope flap */
 
 .envelope:before{
 content:'';
 position:absolute;
-border-left:60px solid transparent;
-border-right:60px solid transparent;
-border-top:40px solid #8b0000;
+
+border-left:65px solid transparent;
+border-right:65px solid transparent;
+border-top:42px solid #7a1212;
+
 top:0;
 left:0;
-transition:0.8s;
+
 transform-origin:top;
+transition:1s;
 }
 
 .open:before{
 transform:rotateX(180deg);
 }
 
-/* messages */
+.close:before{
+transform:rotateX(0deg);
+}
+
+/* Messages */
 
 .message{
-margin-top:15px;
+margin-top:14px;
 font-size:20px;
 opacity:0;
 transition:1s;
@@ -216,7 +227,7 @@ M80 140 C100 120,120 120,140 140"/>
 </div>
 
 <div class="instruction">
-Tap once to open 💌
+Tap the letter 💌
 </div>
 
 <div id="env" class="envelope" onclick="startExperience()"></div>
@@ -264,18 +275,24 @@ musicStarted=true
 let msgs=["m1","m2","m3","m4"]
 
 msgs.forEach((id,index)=>{
+
 setTimeout(()=>{
+
 document.getElementById(id).classList.add("show")
 
 if(id==="m4"){
 softenMusic()
 document.getElementById("m4").classList.add("zoom")
+closeEnvelope()
 }
 
 },1500*(index+1))
+
 })
 
 }
+
+/* soften music */
 
 function softenMusic(){
 
@@ -291,15 +308,33 @@ clearInterval(fade)
 
 }
 
+/* close envelope after message */
+
+function closeEnvelope(){
+
+setTimeout(()=>{
+document.getElementById("env").classList.remove("open")
+document.getElementById("env").classList.add("close")
+},7000)
+
+}
+
 /* shiuli flowers */
 
-for(let i=0;i<15;i++){
+for(let i=0;i<16;i++){
+
 let flower=document.createElement("div")
+
 flower.classList.add("flower")
+
 flower.innerHTML="🌼"
+
 flower.style.left=Math.random()*100+"vw"
+
 flower.style.animationDuration=(5+Math.random()*5)+"s"
+
 document.body.appendChild(flower)
+
 }
 
 </script>
