@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,117 +11,86 @@
 
 <style>
 
-/* ================= BODY FIX ================= */
+/* ===== BASE ===== */
 
 body{
 margin:0;
 font-family:'Noto Serif Bengali',serif;
-min-height:100vh;
-overflow-x:hidden;
 background:#000;
+overflow:hidden;
 }
 
-/* ================= LANDING FIX ================= */
+/* ===== LANDING (STORY STYLE) ===== */
 
 #landing{
 position:fixed;
 inset:0;
 display:flex;
 flex-direction:column;
-align-items:center;
 justify-content:center;
+align-items:center;
 text-align:center;
 
 background:
-linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),
+linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
 url("landing.jpg");
 
 background-size:cover;
 background-position:center;
 
-transition:transform 1s ease, opacity 1s ease;
-padding:20px;
+color:white;
+transition:opacity 1s ease;
 }
 
-/* ================= TRANSITION ================= */
-
-.zoomOut{
-transform:scale(1.3);
-opacity:0;
+.startBtn{
+margin-top:20px;
+padding:14px 28px;
+background:#b22222;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
 }
 
-/* ================= GREETING FIX ================= */
+/* ===== MAIN STORY SCREEN ===== */
 
-#greeting{
+#story{
 display:none;
-min-height:100vh;
-width:100%;
-padding:20px;
-
+position:fixed;
+inset:0;
 justify-content:center;
 align-items:center;
 
 background:
-linear-gradient(rgba(255,255,255,0.25),rgba(255,255,255,0.25)),
+linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),
 url("preview.jpg");
 
 background-size:cover;
 background-position:center;
 }
 
-/* ================= CARD ================= */
+/* ===== CARD ===== */
 
 .card{
+width:min(90vw,380px);
 background:#fffaf0;
-padding:25px;
-width:min(92vw,380px);
-border:3px solid #b22222;
+padding:22px;
+border-radius:12px;
 text-align:center;
-box-shadow:0 12px 30px rgba(0,0,0,0.35);
-border-radius:10px;
-position:relative;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* ================= TEXT ================= */
-
-.intro{
-font-size:18px;
-color:#000;
-}
-
-.eng{
-font-size:14px;
-color:#333;
-}
-
-.instruction{
-font-size:14px;
-margin-top:10px;
-}
-
-/* ================= BUTTON ================= */
-
-.startBtn{
-padding:14px 30px;
-font-size:18px;
-background:#b22222;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-/* ================= ENVELOPE ================= */
+/* ===== ENVELOPE ===== */
 
 .envelope{
 width:130px;
 height:85px;
-margin:20px auto;
+margin:18px auto;
 background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
 border-radius:6px;
-cursor:pointer;
 position:relative;
-overflow:visible;
+cursor:pointer;
 }
 
 .envelope:before{
@@ -133,48 +101,44 @@ border-right:65px solid transparent;
 border-top:45px solid #7a1212;
 top:0;
 left:0;
-transition:1s;
 transform-origin:top;
+transition:1s;
 }
 
 .open:before{
 transform:rotateX(180deg);
 }
 
-/* ================= MESSAGES ================= */
+/* ===== MESSAGES ===== */
 
-.message{
+.msg{
 opacity:0;
-transition:1s;
-margin-top:12px;
-font-size:20px;
+transform:translateY(10px);
+transition:0.8s ease;
+margin-top:10px;
+font-size:18px;
 color:#000;
 }
 
-.show{opacity:1;}
+.show{
+opacity:1;
+transform:translateY(0);
+}
 
 .final{
-font-size:28px;
+font-size:24px;
 color:#b30000;
 font-weight:700;
-animation:glow 2s infinite ease-in-out;
 }
 
-@keyframes glow{
-0%,100%{text-shadow:0 0 5px #ffcccc;}
-50%{text-shadow:0 0 20px #ff6666;}
-}
-
-/* ================= FLOWERS ================= */
+/* ===== FLOWERS ===== */
 
 .flower{
 position:fixed;
 top:-10px;
 font-size:18px;
-pointer-events:none;
-z-index:9999;
 animation:fall linear forwards;
-opacity:0.9;
+pointer-events:none;
 }
 
 @keyframes fall{
@@ -187,43 +151,26 @@ to{transform:translateY(110vh);}
 
 <body>
 
-<audio id="dhaak" src="dhaak.mp3"></audio>
 <audio id="song" src="rabindra.mp3" loop></audio>
 
-<!-- ================= LANDING ================= -->
-
+<!-- LANDING -->
 <div id="landing">
-
-<h2 style="color:black;">নমস্কার<br><span class="eng">(Greetings)</span></h2>
-
-<p style="color:black;">পয়লা বৈশাখের শুভেচ্ছা<br><span class="eng">(Poila Boishakh wishes)</span></p>
-
-<button class="startBtn" onclick="startGreeting()">Click Here</button>
-
+<h2>নমস্কার<br>(Greetings)</h2>
+<p>পয়লা বৈশাখের শুভেচ্ছা</p>
+<button class="startBtn" onclick="start()">Click Here</button>
 </div>
 
-<!-- ================= GREETING ================= -->
-
-<div id="greeting">
+<!-- STORY -->
+<div id="story">
 
 <div class="card">
 
-<div class="intro">
-নমস্কার প্রিয়জন<br><span class="eng">(Nomoshkaar Priyojon)</span><br><br>
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br><span class="eng">(Respect & love)</span>
-</div>
+<div class="envelope" id="env" onclick="openLetter()"></div>
 
-<p class="instruction">চিঠিটিতে চাপ দিন<br><span class="eng">(Tap the letter)</span></p>
-
-<div id="env" class="envelope" onclick="openLetter()"></div>
-
-<div id="m1" class="message">নতুন আলো আসুক জীবনে<br><span class="eng">(New light in life)</span></div>
-
-<div id="m2" class="message">হাসি আর ভালোবাসা থাকুক<br><span class="eng">(Happiness & love)</span></div>
-
-<div id="m3" class="message">স্বপ্নগুলো বড় হোক<br><span class="eng">(Bigger dreams)</span></div>
-
-<div id="m4" class="message final">শুভ নববর্ষ 🌸<br><span class="eng">(Happy New Year)</span></div>
+<div id="m1" class="msg">নতুন আলো আসুক জীবনে<br>(New light in life)</div>
+<div id="m2" class="msg">হাসি আর ভালোবাসা থাকুক<br>(Happiness & love)</div>
+<div id="m3" class="msg">স্বপ্নগুলো বড় হোক<br>(Bigger dreams)</div>
+<div id="m4" class="msg final">শুভ নববর্ষ 🌸<br>(Happy New Year)</div>
 
 </div>
 
@@ -231,45 +178,47 @@ to{transform:translateY(110vh);}
 
 <script>
 
-let dhaak=document.getElementById("dhaak");
 let song=document.getElementById("song");
 
-let dhaakStarted=false;
-
-/* ================= LANDING ================= */
-
-function startGreeting(){
-
-let landing=document.getElementById("landing");
-landing.classList.add("zoomOut");
-
-if(!dhaakStarted){
-dhaakStarted=true;
-dhaak.currentTime=275;
-dhaak.volume=0.2;
-dhaak.play().catch(()=>{});
-fadeAudio(dhaak);
+/* FLOWERS */
+function createFlowers(){
+for(let i=0;i<15;i++){
+spawn();
+}
+setInterval(spawn,500);
 }
 
-createFlowers();
+function spawn(){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌼";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),9000);
+}
+
+/* START */
+
+function start(){
+
+document.getElementById("landing").style.opacity="0";
 
 setTimeout(()=>{
-landing.style.display="none";
-document.getElementById("greeting").style.display="flex";
-},900);
+document.getElementById("landing").style.display="none";
+document.getElementById("story").style.display="flex";
+},800);
 
+/* music */
+song.currentTime=42;
+song.volume=0.35;
+song.play().catch(()=>{});
+
+/* flowers */
+createFlowers();
 }
 
-/* ================= DHAK FADE ================= */
-
-function fadeAudio(audio){
-let f=setInterval(()=>{
-if(audio.volume>0.02) audio.volume-=0.02;
-else {audio.pause();clearInterval(f);}
-},120);
-}
-
-/* ================= ENVELOPE ================= */
+/* ENVELOPE FLOW */
 
 let opened=false;
 
@@ -279,49 +228,24 @@ if(opened) return;
 opened=true;
 
 const env=document.getElementById("env");
-
 env.classList.add("open");
 
-/* SONG */
-song.currentTime=42;
-song.volume=0.35;
-song.play();
+/* messages with chain timing */
+let msgs=["m1","m2","m3","m4"];
 
-/* MESSAGES */
-let ids=["m1","m2","m3","m4"];
-
-ids.forEach((id,i)=>{
+msgs.forEach((id,i)=>{
 setTimeout(()=>{
 document.getElementById(id).classList.add("show");
-},1500*(i+1));
+},1200*(i+1));
 });
 
-}
+/* AUTO CLOSE AFTER LAST MESSAGE */
+setTimeout(()=>{
 
-/* ================= FLOWERS ================= */
+env.classList.remove("open");
 
-function createFlowers(){
+},1200*msgs.length + 1200);
 
-for(let i=0;i<20;i++){
-spawnFlower();
-}
-
-setInterval(spawnFlower,400);
-}
-
-function spawnFlower(){
-
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌼";
-
-f.style.left=Math.random()*100+"vw";
-f.style.animationDuration=(4+Math.random()*5)+"s";
-f.style.fontSize=(12+Math.random()*14)+"px";
-
-document.body.appendChild(f);
-
-setTimeout(()=>f.remove(),9000);
 }
 
 </script>
