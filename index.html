@@ -17,18 +17,21 @@
 
 body{
 margin:0;
-height:100vh;
 font-family:'Noto Serif Bengali',serif;
+height:100vh;
 overflow:hidden;
 background:url("preview.jpg") center/cover no-repeat;
 }
+
+/* light parchment layer */
 
 body::before{
 content:"";
 position:absolute;
 width:100%;
 height:100%;
-background:rgba(255,255,255,0.75);
+background:rgba(255,255,255,0.35);
+z-index:0;
 }
 
 /* landing */
@@ -62,6 +65,7 @@ display:none;
 height:100vh;
 justify-content:center;
 align-items:center;
+z-index:2;
 }
 
 .card{
@@ -71,22 +75,26 @@ width:420px;
 border:3px solid #b22222;
 text-align:center;
 box-shadow:0 12px 30px rgba(0,0,0,0.35);
-border-radius:8px;
+border-radius:10px;
+position:relative;
+z-index:2;
 }
 
 .intro{
 font-size:18px;
-margin-bottom:18px;
-}
-
-.instruction{
-font-size:14px;
-color:#444;
+color:#000;
+margin-bottom:15px;
 }
 
 .eng{
 font-size:14px;
-color:#555;
+color:#333;
+}
+
+.instruction{
+font-size:14px;
+color:#000;
+margin-bottom:10px;
 }
 
 /* envelope */
@@ -124,6 +132,7 @@ opacity:0;
 transition:1s;
 margin-top:12px;
 font-size:20px;
+color:#000;
 }
 
 .show{
@@ -132,11 +141,11 @@ opacity:1;
 
 .final{
 font-size:28px;
-color:#b22222;
-font-weight:600;
+color:#b30000;
+font-weight:700;
 }
 
-/* flowers */
+/* shiuli flowers */
 
 .flower{
 position:absolute;
@@ -160,8 +169,15 @@ to{transform:translateY(110vh);}
 
 <div id="landing">
 
-<h2>নমস্কার 🙏</h2>
-<p>Ready for some Poila Boishakh vibe?</p>
+<h2 style="color:black;">
+নমস্কার<br>
+<span class="eng">(Greetings)</span>
+</h2>
+
+<p style="color:black;">
+পয়লা বৈশাখের ছোট্ট শুভেচ্ছা<br>
+<span class="eng">(A small Poila Boishakh greeting for you)</span>
+</p>
 
 <button class="startBtn" onclick="startGreeting()">
 Click Here
@@ -169,7 +185,7 @@ Click Here
 
 </div>
 
-<!-- GREETING PAGE -->
+<!-- GREETING -->
 
 <div id="greeting">
 
@@ -183,11 +199,14 @@ Click Here
 <br><br>
 
 বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা  
-<br><span class="eng">(Respect to elders, love to younger ones)</span>
+<br><span class="eng">(Respect to elders, love to the younger ones)</span>
 
 </div>
 
-<p class="instruction">Tap the letter 💌</p>
+<p class="instruction">
+চিঠিটিতে চাপ দিন  
+<br><span class="eng">(Tap the letter)</span>
+</p>
 
 <div id="env" class="envelope" onclick="openLetter()"></div>
 
@@ -220,18 +239,12 @@ Click Here
 let dhaak=document.getElementById("dhaak")
 let song=document.getElementById("song")
 
-/* start greeting */
-
 function startGreeting(){
 
 if(dhaak.readyState>=2){
-
 playDhaak()
-
 }else{
-
 dhaak.addEventListener("loadedmetadata",playDhaak)
-
 }
 
 document.getElementById("landing").style.display="none"
@@ -241,7 +254,7 @@ document.getElementById("greeting").style.display="flex"
 
 function playDhaak(){
 
-dhaak.volume=0.2
+dhaak.volume=0.20
 dhaak.currentTime=275
 dhaak.play()
 
@@ -254,21 +267,15 @@ function fadeDhaak(){
 let fade=setInterval(function(){
 
 if(dhaak.volume>0.02){
-
 dhaak.volume-=0.02
-
 }else{
-
 dhaak.pause()
 clearInterval(fade)
-
 }
 
 },120)
 
 }
-
-/* envelope */
 
 let opened=false
 
