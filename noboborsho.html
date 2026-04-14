@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Shubho Nobo Borsho</title>
+
+<meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
+<meta property="og:description" content="A small Bengali New Year letter for you 🌸">
+<meta property="og:image" content="preview.jpg">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f6f1e7;
+font-family:'Noto Serif Bengali', serif;
+overflow:hidden;
+}
+
+/* card */
+
+.card{
+background:#fffaf0;
+border:3px solid #b22222;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+padding:50px;
+width:420px;
+text-align:center;
+border-radius:10px;
+position:relative;
+z-index:2;
+}
+
+/* alpana */
+
+.alpana{
+position:absolute;
+width:130px;
+opacity:0.35;
+}
+
+.alpana path{
+stroke:#b22222;
+stroke-width:2;
+fill:none;
+stroke-dasharray:800;
+stroke-dashoffset:800;
+animation:draw 5s ease forwards;
+}
+
+.alpana.top{top:-50px; left:-50px;}
+.alpana.bottom{bottom:-50px; right:-50px;}
+
+@keyframes draw{
+to{stroke-dashoffset:0;}
+}
+
+/* shiuli flowers */
+
+.flower{
+position:absolute;
+top:-10px;
+font-size:16px;
+opacity:0.8;
+animation:fall linear infinite;
+z-index:1;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+/* text */
+
+.intro{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.instruction{
+font-size:14px;
+color:#555;
+margin-bottom:10px;
+}
+
+/* envelope */
+
+.envelope{
+width:120px;
+height:80px;
+background:#b22222;
+margin:20px auto;
+position:relative;
+cursor:pointer;
+border-radius:4px;
+transition:transform 0.2s ease;
+}
+
+.envelope:hover{
+transform:translateY(-4px);
+}
+
+.envelope:active{
+transform:translateY(2px) scale(0.98);
+}
+
+.envelope:before{
+content:'';
+position:absolute;
+border-left:60px solid transparent;
+border-right:60px solid transparent;
+border-top:40px solid #8b0000;
+top:0;
+left:0;
+transition:0.8s;
+transform-origin:top;
+}
+
+.open:before{
+transform:rotateX(180deg);
+}
+
+/* messages */
+
+.message{
+margin-top:15px;
+font-size:20px;
+opacity:0;
+transition:1s;
+}
+
+.show{
+opacity:1;
+}
+
+.eng{
+font-size:14px;
+color:#555;
+}
+
+.final{
+font-size:28px;
+color:#b22222;
+font-weight:600;
+transition:2s;
+}
+
+.zoom{
+transform:scale(1.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="song" src="rabindra.mp3" loop></audio>
+
+<div class="card">
+
+<!-- alpana -->
+
+<svg class="alpana top" viewBox="0 0 200 200">
+<path d="M100 30 C130 60,130 140,100 170 C70 140,70 60,100 30
+M60 100 C90 90,110 90,140 100
+M80 60 C100 80,120 80,140 60
+M80 140 C100 120,120 120,140 140"/>
+</svg>
+
+<svg class="alpana bottom" viewBox="0 0 200 200">
+<path d="M100 30 C130 60,130 140,100 170 C70 140,70 60,100 30
+M60 100 C90 90,110 90,140 100
+M80 60 C100 80,120 80,140 60
+M80 140 C100 120,120 120,140 140"/>
+</svg>
+
+<!-- greeting -->
+
+<div class="intro">
+
+নমস্কার প্রিয়জন 🙏  
+<br><span class="eng">(Nomoshkaar Priyojon)</span>
+
+<br><br>
+
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা  
+<br><span class="eng">(Respect to elders, love to younger ones)</span>
+
+</div>
+
+<div class="instruction">
+Tap once to open 💌
+</div>
+
+<!-- envelope -->
+
+<div id="env" class="envelope" onclick="startExperience()"></div>
+
+<!-- messages -->
+
+<div id="m1" class="message">
+নতুন আলো আসুক জীবনে  
+<br><span class="eng">(May new light enter your life)</span>
+</div>
+
+<div id="m2" class="message">
+হাসি আর ভালোবাসা থাকুক সবদিন  
+<br><span class="eng">(May laughter and love stay always)</span>
+</div>
+
+<div id="m3" class="message">
+স্বপ্নগুলো হোক আরও বড়  
+<br><span class="eng">(May your dreams grow bigger)</span>
+</div>
+
+<div id="m4" class="message final">
+শুভ নববর্ষ 🌸  
+<br><span class="eng">(Shubho Nobo Borsho)</span>
+</div>
+
+</div>
+
+<script>
+
+let musicStarted=false
+
+function startExperience(){
+
+let env=document.getElementById("env")
+let song=document.getElementById("song")
+
+env.classList.add("open")
+
+if(!musicStarted){
+song.volume=0.35
+song.currentTime=42
+song.play()
+musicStarted=true
+}
+
+// auto reveal messages
+
+let msgs=["m1","m2","m3","m4"]
+
+msgs.forEach((id,index)=>{
+setTimeout(()=>{
+document.getElementById(id).classList.add("show")
+
+if(id==="m4"){
+softenMusic()
+document.getElementById("m4").classList.add("zoom")
+}
+
+},1500*(index+1))
+})
+
+}
+
+// soften music
+
+function softenMusic(){
+let song=document.getElementById("song")
+
+let fade=setInterval(()=>{
+if(song.volume>0.15){
+song.volume-=0.02
+}else{
+clearInterval(fade)
+}
+},300)
+}
+
+// shiuli flowers
+
+for(let i=0;i<15;i++){
+let flower=document.createElement("div")
+flower.classList.add("flower")
+flower.innerHTML="🌼"
+flower.style.left=Math.random()*100+"vw"
+flower.style.animationDuration=(5+Math.random()*5)+"s"
+document.body.appendChild(flower)
+}
+
+</script>
+
+</body>
+</html>
