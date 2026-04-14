@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -20,16 +21,9 @@ margin:0;
 font-family:'Noto Serif Bengali',serif;
 height:100vh;
 overflow:hidden;
-
-background-image:
-linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)),
-url("preview.jpg");
-
-background-size:cover;
-background-position:center;
 }
 
-/* landing page */
+/* LANDING PAGE */
 
 #landing{
 position:absolute;
@@ -40,28 +34,38 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+
+background-image:
+linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),
+url("landing.jpg");
+
+background-size:cover;
+background-position:center;
+transition:transform 1s ease;
 }
 
-.startBtn{
-padding:14px 30px;
-font-size:18px;
-background:#b22222;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
+.zoomOut{
+transform:scale(1.4);
+opacity:0;
 }
 
-/* greeting page */
+/* GREETING PAGE */
 
 #greeting{
 display:none;
 height:100vh;
 justify-content:center;
 align-items:center;
+
+background-image:
+linear-gradient(rgba(255,255,255,0.25),rgba(255,255,255,0.25)),
+url("preview.jpg");
+
+background-size:cover;
+background-position:center;
 }
 
-/* card */
+/* CARD */
 
 .card{
 background:#fffaf0;
@@ -73,7 +77,7 @@ box-shadow:0 12px 30px rgba(0,0,0,0.35);
 border-radius:10px;
 }
 
-/* text */
+/* TEXT */
 
 .intro{
 font-size:18px;
@@ -92,7 +96,19 @@ color:#000;
 margin-bottom:10px;
 }
 
-/* envelope */
+/* BUTTON */
+
+.startBtn{
+padding:14px 30px;
+font-size:18px;
+background:#b22222;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* ENVELOPE */
 
 .envelope{
 width:130px;
@@ -120,7 +136,7 @@ transform-origin:top;
 transform:rotateX(180deg);
 }
 
-/* messages */
+/* MESSAGE */
 
 .message{
 opacity:0;
@@ -140,7 +156,7 @@ color:#b30000;
 font-weight:700;
 }
 
-/* flowers */
+/* FLOWERS */
 
 .flower{
 position:absolute;
@@ -153,25 +169,26 @@ to{transform:translateY(110vh);}
 }
 
 </style>
+
 </head>
 
 <body>
 
-<audio id="dhaak" src="dhaak.mp3" preload="auto"></audio>
-<audio id="song" src="rabindra.mp3" preload="auto" loop></audio>
+<audio id="dhaak" src="dhaak.mp3"></audio>
+<audio id="song" src="rabindra.mp3" loop></audio>
 
-<!-- LANDING -->
+<!-- LANDING PAGE -->
 
 <div id="landing">
 
 <h2 style="color:black;">
-নমস্কার
+নমস্কার  
 <br>
 <span class="eng">(Greetings)</span>
 </h2>
 
 <p style="color:black;">
-পয়লা বৈশাখের ছোট্ট শুভেচ্ছা
+পয়লা বৈশাখের ছোট্ট শুভেচ্ছা  
 <br>
 <span class="eng">(A small Poila Boishakh greeting)</span>
 </p>
@@ -182,7 +199,7 @@ Click Here
 
 </div>
 
-<!-- GREETING -->
+<!-- GREETING PAGE -->
 
 <div id="greeting">
 
@@ -190,20 +207,20 @@ Click Here
 
 <div class="intro">
 
-নমস্কার প্রিয়জন
+নমস্কার প্রিয়জন  
 <br>
 <span class="eng">(Nomoshkaar Priyojon)</span>
 
 <br><br>
 
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা  
 <br>
 <span class="eng">(Respect to elders, love to the younger ones)</span>
 
 </div>
 
 <p class="instruction">
-চিঠিটিতে চাপ দিন
+চিঠিটিতে চাপ দিন  
 <br>
 <span class="eng">(Tap the letter)</span>
 </p>
@@ -211,25 +228,25 @@ Click Here
 <div id="env" class="envelope" onclick="openLetter()"></div>
 
 <div id="m1" class="message">
-নতুন আলো আসুক জীবনে
+নতুন আলো আসুক জীবনে  
 <br>
 <span class="eng">(May new light enter your life)</span>
 </div>
 
 <div id="m2" class="message">
-হাসি আর ভালোবাসা থাকুক সবদিন
+হাসি আর ভালোবাসা থাকুক সবদিন  
 <br>
 <span class="eng">(May laughter and love stay always)</span>
 </div>
 
 <div id="m3" class="message">
-স্বপ্নগুলো হোক আরও বড়
+স্বপ্নগুলো হোক আরও বড়  
 <br>
 <span class="eng">(May your dreams grow bigger)</span>
 </div>
 
 <div id="m4" class="message final">
-শুভ নববর্ষ 🌸
+শুভ নববর্ষ 🌸  
 <br>
 <span class="eng">(Shubho Nobo Borsho)</span>
 </div>
@@ -243,26 +260,28 @@ Click Here
 let dhaak=document.getElementById("dhaak")
 let song=document.getElementById("song")
 
-function startGreeting(){
+window.onload=function(){
 
-if(dhaak.readyState>=2){
-playDhaak()
-}else{
-dhaak.addEventListener("loadedmetadata",playDhaak)
-}
-
-document.getElementById("landing").style.display="none"
-document.getElementById("greeting").style.display="flex"
-
-}
-
-function playDhaak(){
-
-dhaak.volume=0.20
 dhaak.currentTime=275
+dhaak.volume=0.2
 dhaak.play()
 
-setTimeout(fadeDhaak,3000)
+}
+
+function startGreeting(){
+
+let landing=document.getElementById("landing")
+
+landing.classList.add("zoomOut")
+
+fadeDhaak()
+
+setTimeout(function(){
+
+landing.style.display="none"
+document.getElementById("greeting").style.display="flex"
+
+},900)
 
 }
 
@@ -290,8 +309,8 @@ opened=true
 
 document.getElementById("env").classList.add("open")
 
-song.volume=0.35
 song.currentTime=42
+song.volume=0.35
 song.play()
 
 let ids=["m1","m2","m3","m4"]
@@ -313,8 +332,6 @@ document.getElementById("env").classList.remove("open")
 },8000)
 
 }
-
-/* shiuli flowers */
 
 for(let i=0;i<16;i++){
 
