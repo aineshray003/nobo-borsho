@@ -17,8 +17,8 @@
 
 body{
 margin:0;
-height:100vh;
 font-family:'Noto Serif Bengali',serif;
+height:100vh;
 overflow:hidden;
 background:url("preview.jpg") center/cover no-repeat;
 }
@@ -43,7 +43,7 @@ z-index:2;
 }
 
 button{
-padding:14px 28px;
+padding:14px 30px;
 font-size:18px;
 background:#b22222;
 color:white;
@@ -65,12 +65,12 @@ padding:40px;
 width:420px;
 border:3px solid #b22222;
 text-align:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+box-shadow:0 12px 30px rgba(0,0,0,0.35);
 }
 
 .envelope{
-width:120px;
-height:80px;
+width:130px;
+height:85px;
 margin:20px auto;
 background:#b22222;
 cursor:pointer;
@@ -80,9 +80,9 @@ position:relative;
 .envelope:before{
 content:"";
 position:absolute;
-border-left:60px solid transparent;
-border-right:60px solid transparent;
-border-top:40px solid #8b0000;
+border-left:65px solid transparent;
+border-right:65px solid transparent;
+border-top:45px solid #8b0000;
 top:0;
 left:0;
 transition:1s;
@@ -123,8 +123,8 @@ to{transform:translateY(110vh);}
 
 <body>
 
-<audio id="dhaak" src="dhaak.mp3"></audio>
-<audio id="song" src="rabindra.mp3" loop></audio>
+<audio id="dhaak" src="dhaak.mp3" preload="auto"></audio>
+<audio id="song" src="rabindra.mp3" preload="auto" loop></audio>
 
 <div id="landing">
 
@@ -169,31 +169,57 @@ to{transform:translateY(110vh);}
 let dhaak=document.getElementById("dhaak")
 let song=document.getElementById("song")
 
+/* START BUTTON */
+
 function startGreeting(){
 
-dhaak.volume=0.2
-dhaak.currentTime=275
-dhaak.play()
+/* ensure audio loaded */
 
-setTimeout(function(){
+if(dhaak.readyState >= 2){
 
-let fade=setInterval(function(){
+startDhaak()
 
-if(dhaak.volume>0.02){
-dhaak.volume-=0.02
 }else{
-dhaak.pause()
-clearInterval(fade)
+
+dhaak.addEventListener("loadedmetadata", startDhaak)
+
 }
-
-},120)
-
-},3000)
 
 document.getElementById("landing").style.display="none"
 document.getElementById("greeting").style.display="flex"
 
 }
+
+function startDhaak(){
+
+dhaak.volume=0.2
+dhaak.currentTime=275
+dhaak.play()
+
+setTimeout(fadeDhaak,3000)
+
+}
+
+function fadeDhaak(){
+
+let fade=setInterval(function(){
+
+if(dhaak.volume>0.02){
+
+dhaak.volume-=0.02
+
+}else{
+
+dhaak.pause()
+clearInterval(fade)
+
+}
+
+},120)
+
+}
+
+/* ENVELOPE */
 
 let opened=false
 
@@ -211,16 +237,24 @@ song.play()
 let ids=["m1","m2","m3","m4"]
 
 ids.forEach((id,i)=>{
-setTimeout(()=>{
+
+setTimeout(function(){
+
 document.getElementById(id).classList.add("show")
+
 },1500*(i+1))
+
 })
 
-setTimeout(()=>{
+setTimeout(function(){
+
 document.getElementById("env").classList.remove("open")
+
 },8000)
 
 }
+
+/* FLOWERS */
 
 for(let i=0;i<15;i++){
 
