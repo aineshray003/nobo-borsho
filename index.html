@@ -84,7 +84,7 @@ text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* GREETING TEXT */
+/* GREETING */
 .intro{
 font-size:17px;
 color:#000;
@@ -164,7 +164,9 @@ to{transform:translateY(110vh);}
 
 <body>
 
+<!-- 🔊 AUDIO FIX -->
 <audio id="song" src="rabindra.mp3" loop></audio>
+<audio id="dhaak" src="dhaak.mp3"></audio>
 
 <!-- LANDING -->
 <div id="landing">
@@ -209,9 +211,11 @@ to{transform:translateY(110vh);}
 <script>
 
 let song=document.getElementById("song");
+let dhaak=document.getElementById("dhaak");
+
 let userName="প্রিয়জন";
 
-/* START FUNCTION (FIXED) */
+/* START */
 function start(){
 
 let input=document.getElementById("nameInput");
@@ -222,19 +226,20 @@ userName=input.value.trim();
 document.getElementById("landing").style.display="none";
 document.getElementById("story").style.display="flex";
 
-/* MUSIC FIX — ONLY AFTER CLICK */
+/* 🎵 SONG (safe) */
 song.currentTime = 42;
 song.volume = 0.35;
+song.play().catch(()=>{});
 
-let playPromise = song.play();
+/* 🥁 DHAK FIX */
+dhaak.currentTime = 275; // 4:35
+dhaak.volume = 0.2;
 
-if(playPromise !== undefined){
-playPromise.catch(()=>{
+dhaak.play().catch(()=>{
 document.addEventListener("click", () => {
-song.play();
+dhaak.play();
 }, { once:true });
 });
-}
 
 /* FLOWERS */
 createFlowers();
@@ -279,7 +284,6 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* FINAL MESSAGE */
 setTimeout(()=>{
 
 document.getElementById("finalMsg").innerHTML =
