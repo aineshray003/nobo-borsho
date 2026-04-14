@@ -30,6 +30,7 @@ flex-direction:column;
 align-items:center;
 justify-content:flex-start;
 text-align:center;
+
 padding-top:45vh;
 
 background:
@@ -159,51 +160,20 @@ animation:glow 2s infinite ease-in-out;
 
 /* FLOWERS */
 
-function createFlowers(){
-
-for(let i=0;i<25;i++){
-
-spawnFlower();
-
+.flower{
+position:fixed;
+top:-10px;
+font-size:18px;
+pointer-events:none;
+z-index:9999;
+animation:fall linear forwards;
+opacity:0.9;
 }
-
-}
-
-function spawnFlower(){
-
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌼";
-
-f.style.left=Math.random()*100+"vw";
-f.style.animationDuration=(4+Math.random()*4)+"s";
-f.style.fontSize=(12+Math.random()*14)+"px";
-f.style.opacity=0.6+Math.random()*0.4;
-
-document.body.appendChild(f);
-
-/* remove after fall */
-setTimeout(()=>f.remove(),9000);
-}
-
-/* continuous natural falling */
-setInterval(spawnFlower,400);
-
-createFlowers();
 
 @keyframes fall{
-to{transform:translateY(110vh);}
+to{
+transform:translateY(110vh);
 }
-
-/* ALPANA */
-
-.alpana{
-position:absolute;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:1;
-opacity:0.6;
 }
 
 </style>
@@ -263,7 +233,7 @@ let paper=document.getElementById("paper");
 
 let dhaakStarted=false;
 
-/* LANDING → GREETING */
+/* LANDING */
 
 function startGreeting(){
 
@@ -279,13 +249,14 @@ dhaak.play().catch(()=>{});
 setTimeout(()=>fadeAudio(dhaak),3000);
 }
 
-/* ALPANA */
-drawAlpana();
+/* FLOWERS START */
+createFlowers();
 
 setTimeout(()=>{
 landing.style.display="none";
 document.getElementById("greeting").style.display="flex";
 },900);
+
 }
 
 /* FADE AUDIO */
@@ -308,15 +279,12 @@ opened=true;
 
 document.getElementById("env").classList.add("open");
 
-/* PAPER SOUND */
 paper.play().catch(()=>{});
 
-/* SONG */
 song.currentTime=42;
 song.volume=0.35;
 song.play();
 
-/* TEXT REVEAL */
 let ids=["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
@@ -325,80 +293,32 @@ document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
 
-setTimeout(()=>{
-document.getElementById("env").classList.remove("open");
-},8000);
 }
 
 /* FLOWERS */
 
 function createFlowers(){
 
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
+spawnFlower();
+}
+
+setInterval(spawnFlower,400);
+}
+
+function spawnFlower(){
+
 let f=document.createElement("div");
 f.className="flower";
 f.innerHTML="🌼";
 
 f.style.left=Math.random()*100+"vw";
 f.style.animationDuration=(4+Math.random()*5)+"s";
-
-document.body.appendChild(f);
-}
-
-}
-
-createFlowers();
-
-/* FLOWER TAP BURST */
-
-document.addEventListener("click",function(e){
-
-for(let i=0;i<6;i++){
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌼";
-
-f.style.left=e.clientX+"px";
-f.style.top=e.clientY+"px";
-f.style.position="absolute";
-f.style.animationDuration="1.5s";
+f.style.fontSize=(12+Math.random()*14)+"px";
 
 document.body.appendChild(f);
 
-setTimeout(()=>f.remove(),1500);
-}
-
-});
-
-/* ALPANA */
-
-function drawAlpana(){
-
-let canvas=document.createElement("canvas");
-canvas.className="alpana";
-document.getElementById("greeting").appendChild(canvas);
-
-let ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let t=0;
-
-function animate(){
-t+=0.01;
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.beginPath();
-ctx.arc(canvas.width/2,canvas.height/2,120+Math.sin(t)*5,0,Math.PI*2);
-ctx.strokeStyle="rgba(178,34,34,0.4)";
-ctx.lineWidth=2;
-ctx.stroke();
-
-requestAnimationFrame(animate);
-}
-
-animate();
+setTimeout(()=>f.remove(),9000);
 }
 
 </script>
