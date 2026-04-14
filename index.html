@@ -211,29 +211,30 @@ to{transform:translateY(110vh);}
 let song=document.getElementById("song");
 let userName="প্রিয়জন";
 
-/* START */
+/* START FUNCTION (FIXED) */
+function start(){
+
+let input=document.getElementById("nameInput");
+if(input.value.trim()!==""){
+userName=input.value.trim();
+}
+
+document.getElementById("landing").style.display="none";
+document.getElementById("story").style.display="flex";
+
+/* MUSIC FIX — ONLY AFTER CLICK */
 song.currentTime = 42;
 song.volume = 0.35;
 
 let playPromise = song.play();
 
-if (playPromise !== undefined) {
-playPromise
-.then(() => {
-console.log("music playing");
-})
-.catch(() => {
-console.log("autoplay blocked - retrying");
+if(playPromise !== undefined){
+playPromise.catch(()=>{
 document.addEventListener("click", () => {
 song.play();
-}, { once: true });
+}, { once:true });
 });
 }
-
-/* MUSIC */
-song.currentTime=42;
-song.volume=0.35;
-song.play().catch(()=>{});
 
 /* FLOWERS */
 createFlowers();
@@ -278,7 +279,7 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* FINAL MESSAGE WITH NAME */
+/* FINAL MESSAGE */
 setTimeout(()=>{
 
 document.getElementById("finalMsg").innerHTML =
