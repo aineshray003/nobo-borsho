@@ -159,14 +159,37 @@ animation:glow 2s infinite ease-in-out;
 
 /* FLOWERS */
 
-.flower{
-position:absolute;
-top:-10px;
-font-size:18px;
-animation:fall linear infinite;
-pointer-events:none;
-z-index:999;
+function createFlowers(){
+
+for(let i=0;i<25;i++){
+
+spawnFlower();
+
 }
+
+}
+
+function spawnFlower(){
+
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌼";
+
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(4+Math.random()*4)+"s";
+f.style.fontSize=(12+Math.random()*14)+"px";
+f.style.opacity=0.6+Math.random()*0.4;
+
+document.body.appendChild(f);
+
+/* remove after fall */
+setTimeout(()=>f.remove(),9000);
+}
+
+/* continuous natural falling */
+setInterval(spawnFlower,400);
+
+createFlowers();
 
 @keyframes fall{
 to{transform:translateY(110vh);}
