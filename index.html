@@ -116,6 +116,7 @@ background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
 border-radius:6px;
 cursor:pointer;
 position:relative;
+overflow:visible;
 }
 
 .envelope:before{
@@ -132,6 +133,30 @@ transform-origin:top;
 
 .open:before{
 transform:rotateX(180deg);
+}
+
+/* 🔴 WAX STAMP */
+
+.wax{
+position:absolute;
+width:28px;
+height:28px;
+background:#b30000;
+border-radius:50%;
+bottom:10px;
+left:50%;
+transform:translateX(-50%) scale(0);
+box-shadow:0 0 10px rgba(179,0,0,0.6);
+}
+
+.wax.animate{
+animation:waxPop 1.2s ease forwards;
+}
+
+@keyframes waxPop{
+0%{transform:translateX(-50%) scale(0);}
+60%{transform:translateX(-50%) scale(1.4);}
+100%{transform:translateX(-50%) scale(1);}
 }
 
 /* MESSAGES */
@@ -171,9 +196,7 @@ opacity:0.9;
 }
 
 @keyframes fall{
-to{
-transform:translateY(110vh);
-}
+to{transform:translateY(110vh);}
 }
 
 </style>
@@ -211,7 +234,9 @@ transform:translateY(110vh);
 
 <p class="instruction">চিঠিটিতে চাপ দিন<br><span class="eng">(Tap the letter)</span></p>
 
-<div id="env" class="envelope" onclick="openLetter()"></div>
+<div id="env" class="envelope" onclick="openLetter()">
+<div id="wax" class="wax"></div>
+</div>
 
 <div id="m1" class="message">নতুন আলো আসুক জীবনে<br><span class="eng">(New light in life)</span></div>
 
@@ -249,7 +274,7 @@ dhaak.play().catch(()=>{});
 setTimeout(()=>fadeAudio(dhaak),3000);
 }
 
-/* FLOWERS START */
+/* FLOWERS */
 createFlowers();
 
 setTimeout(()=>{
@@ -270,25 +295,26 @@ else {audio.pause();clearInterval(f);}
 
 /* ENVELOPE */
 
-let opened = false;
+let opened=false;
 
 function openLetter(){
 
 if(opened) return;
-opened = true;
+opened=true;
 
-const env = document.getElementById("env");
+const env=document.getElementById("env");
+const wax=document.getElementById("wax");
+
 env.classList.add("open");
 
-/* sounds */
 paper.play().catch(()=>{});
 
-song.currentTime = 42;
-song.volume = 0.35;
+song.currentTime=42;
+song.volume=0.35;
 song.play();
 
 /* messages */
-let ids = ["m1","m2","m3","m4"];
+let ids=["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
 setTimeout(()=>{
@@ -296,18 +322,12 @@ document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
 
-/* ✅ CLOSE AFTER LAST MESSAGE (NOT TIMEBASED) */
-let totalDelay = 1500 * ids.length + 1200;
-
+/* 🔴 WAX SEAL ANIMATION (NEW ADDITION ONLY) */
 setTimeout(()=>{
-
-env.classList.remove("open");
-
-}, totalDelay);
+wax.classList.add("animate");
+},1500*(ids.length));
 
 }
-
-/* FLOWERS */
 
 function createFlowers(){
 
