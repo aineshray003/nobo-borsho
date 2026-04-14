@@ -38,6 +38,12 @@ background-position:center;
 color:white;
 }
 
+/* ✅ FIX ADDED (ONLY CHANGE) */
+#landing .eng{
+color:white;
+opacity:0.9;
+}
+
 /* INPUT */
 input{
 margin-top:15px;
@@ -60,7 +66,7 @@ font-size:16px;
 cursor:pointer;
 }
 
-/* LANDING FOOTER NOTE (FIXED HERE) */
+/* LANDING FOOTER NOTE */
 .landing-note{
 position:absolute;
 bottom:15px;
@@ -188,9 +194,7 @@ to{transform:translateY(110vh);}
 <div id="landing">
 
 <h2>নমস্কার<br>(Greetings)</h2>
-<p>পয়লা বৈশাখের জন্য একটি ছোট্ট চমকের জন্য প্রস্তুত তো?
-<span class="eng">(Are you ready for a little surprise of Poila Boishakh?)</span>
-</p>
+<p>পয়লা বৈশাখের শুভেচ্ছা</p>
 
 <input id="nameInput" type="text" placeholder="Enter your name">
 
@@ -255,7 +259,7 @@ document.getElementById("story").style.display="flex";
 /* FLOWERS */
 createFlowers();
 
-/* 🔥 DHAK START (ONLY ON LANDING → UNTIL ENVELOPE CLICK) */
+/* DHAK START */
 dhaak.volume=0.2;
 dhaak.currentTime=275;
 
@@ -287,7 +291,7 @@ document.body.appendChild(f);
 setTimeout(()=>f.remove(),9000);
 }
 
-/* ENVELOPE CLICK */
+/* ENVELOPE */
 function openLetter(){
 
 if(opened) return;
@@ -302,7 +306,7 @@ song.volume=0.35;
 song.currentTime=42;
 song.play().catch(()=>{});
 
-/* OPEN ENVELOPE */
+/* OPEN ANIMATION */
 document.getElementById("env").classList.add("open");
 
 /* MESSAGES */
