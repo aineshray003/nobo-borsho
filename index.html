@@ -38,6 +38,7 @@ background-position:center;
 color:white;
 }
 
+/* INPUT */
 input{
 margin-top:15px;
 padding:10px;
@@ -47,6 +48,7 @@ text-align:center;
 width:220px;
 }
 
+/* BUTTON */
 .startBtn{
 margin-top:15px;
 padding:12px 26px;
@@ -56,6 +58,20 @@ border:none;
 border-radius:10px;
 font-size:16px;
 cursor:pointer;
+}
+
+/* LANDING FOOTER NOTE (FIXED HERE) */
+.landing-note{
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+font-style:italic;
+font-size:13px;
+color:white;
+opacity:0.85;
+width:90%;
+text-align:center;
 }
 
 /* STORY */
@@ -95,20 +111,6 @@ margin-bottom:10px;
 .eng{
 font-size:14px;
 color:#333;
-}
-
-/* BOTTOM NOTE */
-.note{
-position:absolute;
-bottom:15px;
-left:50%;
-transform:translateX(-50%);
-font-style:italic;
-font-size:12px;
-color:white;
-opacity:0.8;
-text-align:center;
-width:90%;
 }
 
 /* ENVELOPE */
@@ -186,15 +188,18 @@ to{transform:translateY(110vh);}
 <div id="landing">
 
 <h2>নমস্কার<br>(Greetings)</h2>
-
-<p>
-পয়লা বৈশাখের জন্য একটি ছোট্ট চমকের জন্য প্রস্তুত তো?ছা<br>
-<span class="eng">(Ready for a quick surprise of Poila Boishakh?)</span>
-</p>
+<p>পয়লা বৈশাখের শুভেচ্ছা</p>
 
 <input id="nameInput" type="text" placeholder="Enter your name">
 
 <button class="startBtn" onclick="start()">Click Here</button>
+
+<!-- FIXED LANDING NOTE -->
+<div class="landing-note">
+<i>
+Hope you like it. Wishing you a Shubho Nobo Borsho. It is an initial first timer set. If any problem faced, do let me know.
+</i>
+</div>
 
 </div>
 
@@ -224,14 +229,6 @@ to{transform:translateY(110vh);}
 
 </div>
 
-<!-- FOOTER NOTE -->
-<div class="note">
-<i>
-Hope you like it. Wishing you a Shubho Nobo Borsho.  
-It is an initial first timer set. If any problem faced, do let me know.
-</i>
-</div>
-
 </div>
 
 <script>
@@ -256,7 +253,7 @@ document.getElementById("story").style.display="flex";
 /* FLOWERS */
 createFlowers();
 
-/* DHAK START */
+/* 🔥 DHAK START (ONLY ON LANDING → UNTIL ENVELOPE CLICK) */
 dhaak.volume=0.2;
 dhaak.currentTime=275;
 
@@ -288,15 +285,25 @@ document.body.appendChild(f);
 setTimeout(()=>f.remove(),9000);
 }
 
-/* ENVELOPE (FIXED AUTO CLOSE) */
+/* ENVELOPE CLICK */
 function openLetter(){
 
 if(opened) return;
 opened=true;
 
-const env=document.getElementById("env");
-env.classList.add("open");
+/* STOP DHAK */
+dhaak.pause();
+dhaak.currentTime=0;
 
+/* START RABINDRA */
+song.volume=0.35;
+song.currentTime=42;
+song.play().catch(()=>{});
+
+/* OPEN ENVELOPE */
+document.getElementById("env").classList.add("open");
+
+/* MESSAGES */
 let msgs=["m1","m2","m3"];
 
 msgs.forEach((id,i)=>{
@@ -305,12 +312,7 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* AUTO CLOSE ENVELOPE AFTER MESSAGE FLOW */
-setTimeout(()=>{
-env.classList.remove("open");
-},1200*(msgs.length+1));
-
-/* FINAL MESSAGE */
+/* FINAL */
 setTimeout(()=>{
 
 document.getElementById("finalMsg").innerHTML =
