@@ -3,10 +3,13 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Shubho Nobo Borsho</title>
 
+<!-- Social Preview -->
 <meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
-<meta property="og:description" content="A small Bengali New Year letter for you 🌸">
+<meta property="og:description" content="A small Bengali New Year letter for you 🌸 Tap to open.">
 <meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
 <meta property="og:type" content="website">
 
@@ -14,23 +17,15 @@
 
 <style>
 
-/* background */
-
 body{
 margin:0;
 height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-font-family:'Noto Serif Bengali', serif;
+font-family:'Noto Serif Bengali',serif;
 overflow:hidden;
-
 background-image:url("preview.jpg");
 background-size:cover;
 background-position:center;
 }
-
-/* fade overlay */
 
 body::before{
 content:"";
@@ -39,11 +34,55 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(255,255,255,0.78);
+background:linear-gradient(
+rgba(255,255,255,0.65),
+rgba(255,255,255,0.80)
+);
 z-index:0;
 }
 
-/* card */
+#landing{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+z-index:3;
+}
+
+#landing h1{
+font-size:42px;
+color:#b22222;
+margin-bottom:10px;
+}
+
+#landing p{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.startBtn{
+padding:14px 26px;
+font-size:18px;
+background:#b22222;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+box-shadow:0 6px 12px rgba(0,0,0,0.3);
+}
+
+#greeting{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+}
 
 .card{
 background:rgba(255,250,240,0.96);
@@ -57,49 +96,6 @@ position:relative;
 z-index:2;
 }
 
-/* alpana */
-
-.alpana{
-position:absolute;
-width:130px;
-opacity:0.35;
-}
-
-.alpana path{
-stroke:#b22222;
-stroke-width:2;
-fill:none;
-stroke-dasharray:800;
-stroke-dashoffset:800;
-animation:draw 5s ease forwards;
-}
-
-.alpana.top{top:-50px; left:-50px;}
-.alpana.bottom{bottom:-50px; right:-50px;}
-
-@keyframes draw{
-to{stroke-dashoffset:0;}
-}
-
-/* shiuli flowers */
-
-.flower{
-position:absolute;
-top:-10px;
-font-size:16px;
-opacity:0.9;
-animation:fall linear infinite;
-z-index:1;
-}
-
-@keyframes fall{
-to{
-transform:translateY(110vh);
-}
-}
-
-/* text */
-
 .intro{
 font-size:18px;
 margin-bottom:20px;
@@ -110,46 +106,25 @@ font-size:14px;
 color:#444;
 }
 
-/* velvet envelope */
-
 .envelope{
 width:130px;
 height:85px;
 margin:22px auto;
 position:relative;
 cursor:pointer;
-
 background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
 border-radius:6px;
-
-box-shadow:
-0 6px 12px rgba(0,0,0,0.35),
-inset 0 2px 4px rgba(255,255,255,0.15);
-
-transition:transform .2s;
+box-shadow:0 6px 12px rgba(0,0,0,0.35);
 }
-
-.envelope:hover{
-transform:translateY(-4px);
-}
-
-.envelope:active{
-transform:translateY(2px) scale(.97);
-}
-
-/* envelope flap */
 
 .envelope:before{
 content:'';
 position:absolute;
-
 border-left:65px solid transparent;
 border-right:65px solid transparent;
 border-top:42px solid #7a1212;
-
 top:0;
 left:0;
-
 transform-origin:top;
 transition:1s;
 }
@@ -157,8 +132,6 @@ transition:1s;
 .open:before{
 transform:rotateX(180deg);
 }
-
-/* messages */
 
 .message{
 margin-top:14px;
@@ -180,11 +153,19 @@ color:#444;
 font-size:28px;
 color:#b22222;
 font-weight:600;
-transition:2s;
 }
 
-.zoom{
-transform:scale(1.08);
+.flower{
+position:absolute;
+top:-10px;
+font-size:16px;
+opacity:0.9;
+animation:fall linear infinite;
+z-index:1;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
 }
 
 </style>
@@ -193,26 +174,26 @@ transform:scale(1.08);
 <body>
 
 <audio id="song" src="rabindra.mp3" loop></audio>
+<audio id="dhaak" src="dhaak.mp3"></audio>
+
+<div id="landing">
+
+<h1>নমস্কার 🙏</h1>
+<p>Ready for some Bengali New Year vibe?</p>
+
+<button class="startBtn" onclick="startGreeting()">
+Click Here
+</button>
+
+</div>
+
+<div id="greeting">
 
 <div class="card">
 
-<svg class="alpana top" viewBox="0 0 200 200">
-<path d="M100 30 C130 60,130 140,100 170 C70 140,70 60,100 30
-M60 100 C90 90,110 90,140 100
-M80 60 C100 80,120 80,140 60
-M80 140 C100 120,120 120,140 140"/>
-</svg>
-
-<svg class="alpana bottom" viewBox="0 0 200 200">
-<path d="M100 30 C130 60,130 140,100 170 C70 140,70 60,100 30
-M60 100 C90 90,110 90,140 100
-M80 60 C100 80,120 80,140 60
-M80 140 C100 120,120 120,140 140"/>
-</svg>
-
 <div class="intro">
 
-নমস্কার প্রিয়জন 🙏  
+নমস্কার প্রিয়জন  
 <br><span class="eng">(Nomoshkaar Priyojon)</span>
 
 <br><br>
@@ -249,105 +230,63 @@ Tap the letter 💌
 </div>
 
 </div>
+</div>
 
 <script>
 
-let musicStarted=false
+function startGreeting(){
+document.getElementById("landing").style.display="none"
+document.getElementById("greeting").style.display="flex"
+}
+
+let started=false
 
 function startExperience(){
 
+if(started) return
+started=true
+
 let env=document.getElementById("env")
 let song=document.getElementById("song")
+let dhaak=document.getElementById("dhaak")
 
 env.classList.add("open")
 
-if(!musicStarted){
+dhaak.volume=0.20
+dhaak.currentTime=274
+dhaak.play()
+
 song.volume=0.35
 song.currentTime=42
 song.play()
-musicStarted=true
-}
 
 let msgs=["m1","m2","m3","m4"]
 
 msgs.forEach((id,index)=>{
 
 setTimeout(()=>{
-
 document.getElementById(id).classList.add("show")
-
-if(id==="m4"){
-softenMusic()
-document.getElementById("m4").classList.add("zoom")
-}
-
 },1500*(index+1))
 
 })
-
-/* envelope closes */
 
 setTimeout(()=>{
 env.classList.remove("open")
 },8000)
 
-/* shiuli blessing burst */
-
-setTimeout(()=>{
-extraFlowers()
-},6500)
-
 }
-
-/* soften music */
-
-function softenMusic(){
-
-let song=document.getElementById("song")
-
-let fade=setInterval(()=>{
-if(song.volume>0.15){
-song.volume-=0.02
-}else{
-clearInterval(fade)
-}
-},300)
-
-}
-
-/* continuous flowers */
 
 for(let i=0;i<16;i++){
 
 let flower=document.createElement("div")
+
 flower.classList.add("flower")
 flower.innerHTML="🌼"
+
 flower.style.left=Math.random()*100+"vw"
 flower.style.animationDuration=(5+Math.random()*5)+"s"
 
 document.body.appendChild(flower)
-
-}
-
-/* blessing burst */
-
-function extraFlowers(){
-
-for(let i=0;i<12;i++){
-
-let flower=document.createElement("div")
-
-flower.classList.add("flower")
-
-flower.innerHTML="🌼"
-
-flower.style.left=Math.random()*100+"vw"
-
-flower.style.animationDuration="4s"
-
-document.body.appendChild(flower)
-
-}
 
 }
 
