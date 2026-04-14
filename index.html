@@ -31,11 +31,10 @@ width:100%;
 height:100%;
 display:flex;
 flex-direction:column;
-justify-content:flex-start;
 align-items:center;
 text-align:center;
 
-padding-top:32vh;
+padding-top:45vh;
 
 background-image:
 linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),
@@ -50,6 +49,19 @@ transition:transform 1s ease;
 .zoomOut{
 transform:scale(1.4);
 opacity:0;
+}
+
+/* FADE IN TITLE */
+
+.fadeTitle{
+opacity:0;
+animation:fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+to{
+opacity:1;
+}
 }
 
 /* GREETING PAGE */
@@ -160,7 +172,7 @@ color:#b30000;
 font-weight:700;
 }
 
-/* FLOWERS */
+/* SHIULI FLOWERS */
 
 .flower{
 position:absolute;
@@ -185,10 +197,10 @@ to{transform:translateY(110vh);}
 
 <div id="landing">
 
-<h2 style="color:black; margin-top:40px;">
+<h2 class="fadeTitle" style="color:black;">
 নমস্কার  
 <br>
-<span class="eng">(Greetings to all)</span>
+<span class="eng">(Greetings)</span>
 </h2>
 
 <p style="color:black;">
@@ -198,7 +210,7 @@ to{transform:translateY(110vh);}
 </p>
 
 <button class="startBtn" onclick="startGreeting()">
-Click Here for more
+Click Here
 </button>
 
 </div>
@@ -272,6 +284,8 @@ dhaak.play()
 
 }
 
+/* CLICK BUTTON */
+
 function startGreeting(){
 
 let landing=document.getElementById("landing")
@@ -289,6 +303,8 @@ document.getElementById("greeting").style.display="flex"
 
 }
 
+/* DHAK FADE */
+
 function fadeDhaak(){
 
 let fade=setInterval(function(){
@@ -303,6 +319,8 @@ clearInterval(fade)
 },120)
 
 }
+
+/* ENVELOPE */
 
 let opened=false
 
@@ -336,6 +354,8 @@ document.getElementById("env").classList.remove("open")
 },8000)
 
 }
+
+/* SHIULI FLOWERS */
 
 for(let i=0;i<16;i++){
 
