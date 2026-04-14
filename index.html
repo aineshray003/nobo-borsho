@@ -7,18 +7,18 @@
 
 <title>Shubho Nobo Borsho</title>
 
-<meta property="og:title" content="শুভ নববর্ষ">
-<meta property="og:description" content="Tap to open a Bengali New Year letter 🌸">
+<meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
+<meta property="og:description" content="Tap to open a Bengali New Year greeting 🌸">
 <meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:'Noto Serif Bengali',serif;
 height:100vh;
+font-family:'Noto Serif Bengali',serif;
 overflow:hidden;
 background:url("preview.jpg") center/cover no-repeat;
 }
@@ -31,6 +31,8 @@ height:100%;
 background:rgba(255,255,255,0.75);
 }
 
+/* landing */
+
 #landing{
 position:absolute;
 width:100%;
@@ -39,10 +41,11 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 z-index:2;
 }
 
-button{
+.startBtn{
 padding:14px 30px;
 font-size:18px;
 background:#b22222;
@@ -51,6 +54,8 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 }
+
+/* greeting */
 
 #greeting{
 display:none;
@@ -61,20 +66,39 @@ align-items:center;
 
 .card{
 background:#fffaf0;
-padding:40px;
+padding:45px;
 width:420px;
 border:3px solid #b22222;
 text-align:center;
 box-shadow:0 12px 30px rgba(0,0,0,0.35);
+border-radius:8px;
 }
+
+.intro{
+font-size:18px;
+margin-bottom:18px;
+}
+
+.instruction{
+font-size:14px;
+color:#444;
+}
+
+.eng{
+font-size:14px;
+color:#555;
+}
+
+/* envelope */
 
 .envelope{
 width:130px;
 height:85px;
 margin:20px auto;
-background:#b22222;
+background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
 cursor:pointer;
 position:relative;
+border-radius:6px;
 }
 
 .envelope:before{
@@ -82,7 +106,7 @@ content:"";
 position:absolute;
 border-left:65px solid transparent;
 border-right:65px solid transparent;
-border-top:45px solid #8b0000;
+border-top:45px solid #7a1212;
 top:0;
 left:0;
 transition:1s;
@@ -93,10 +117,13 @@ transform-origin:top;
 transform:rotateX(180deg);
 }
 
+/* messages */
+
 .message{
 opacity:0;
 transition:1s;
 margin-top:12px;
+font-size:20px;
 }
 
 .show{
@@ -104,9 +131,12 @@ opacity:1;
 }
 
 .final{
-font-size:26px;
+font-size:28px;
 color:#b22222;
+font-weight:600;
 }
+
+/* flowers */
 
 .flower{
 position:absolute;
@@ -126,38 +156,59 @@ to{transform:translateY(110vh);}
 <audio id="dhaak" src="dhaak.mp3" preload="auto"></audio>
 <audio id="song" src="rabindra.mp3" preload="auto" loop></audio>
 
+<!-- LANDING -->
+
 <div id="landing">
 
 <h2>নমস্কার 🙏</h2>
 <p>Ready for some Poila Boishakh vibe?</p>
 
-<button onclick="startGreeting()">Click Here</button>
+<button class="startBtn" onclick="startGreeting()">
+Click Here
+</button>
 
 </div>
+
+<!-- GREETING PAGE -->
 
 <div id="greeting">
 
 <div class="card">
 
-<p>
-নমস্কার প্রিয়জন<br>
-(Nomoshkaar Priyojon)
-</p>
+<div class="intro">
 
-<p>
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা
-</p>
+নমস্কার প্রিয়জন  
+<br><span class="eng">(Nomoshkaar Priyojon)</span>
 
-<p>Tap the letter 💌</p>
+<br><br>
+
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা  
+<br><span class="eng">(Respect to elders, love to younger ones)</span>
+
+</div>
+
+<p class="instruction">Tap the letter 💌</p>
 
 <div id="env" class="envelope" onclick="openLetter()"></div>
 
-<div id="m1" class="message">নতুন আলো আসুক জীবনে</div>
-<div id="m2" class="message">হাসি আর ভালোবাসা থাকুক</div>
-<div id="m3" class="message">স্বপ্নগুলো হোক আরও বড়</div>
+<div id="m1" class="message">
+নতুন আলো আসুক জীবনে  
+<br><span class="eng">(May new light enter your life)</span>
+</div>
+
+<div id="m2" class="message">
+হাসি আর ভালোবাসা থাকুক সবদিন  
+<br><span class="eng">(May laughter and love stay always)</span>
+</div>
+
+<div id="m3" class="message">
+স্বপ্নগুলো হোক আরও বড়  
+<br><span class="eng">(May your dreams grow bigger)</span>
+</div>
 
 <div id="m4" class="message final">
-শুভ নববর্ষ 🌸
+শুভ নববর্ষ 🌸  
+<br><span class="eng">(Shubho Nobo Borsho)</span>
 </div>
 
 </div>
@@ -169,19 +220,17 @@ to{transform:translateY(110vh);}
 let dhaak=document.getElementById("dhaak")
 let song=document.getElementById("song")
 
-/* START BUTTON */
+/* start greeting */
 
 function startGreeting(){
 
-/* ensure audio loaded */
+if(dhaak.readyState>=2){
 
-if(dhaak.readyState >= 2){
-
-startDhaak()
+playDhaak()
 
 }else{
 
-dhaak.addEventListener("loadedmetadata", startDhaak)
+dhaak.addEventListener("loadedmetadata",playDhaak)
 
 }
 
@@ -190,7 +239,7 @@ document.getElementById("greeting").style.display="flex"
 
 }
 
-function startDhaak(){
+function playDhaak(){
 
 dhaak.volume=0.2
 dhaak.currentTime=275
@@ -219,7 +268,7 @@ clearInterval(fade)
 
 }
 
-/* ENVELOPE */
+/* envelope */
 
 let opened=false
 
@@ -254,9 +303,9 @@ document.getElementById("env").classList.remove("open")
 
 }
 
-/* FLOWERS */
+/* shiuli flowers */
 
-for(let i=0;i<15;i++){
+for(let i=0;i<16;i++){
 
 let f=document.createElement("div")
 
