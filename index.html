@@ -11,8 +11,7 @@
 
 <style>
 
-/* ===== BASE ===== */
-
+/* BASE */
 body{
 margin:0;
 font-family:'Noto Serif Bengali',serif;
@@ -20,8 +19,7 @@ background:#000;
 overflow:hidden;
 }
 
-/* ===== LANDING (STORY STYLE) ===== */
-
+/* LANDING */
 #landing{
 position:fixed;
 inset:0;
@@ -53,8 +51,7 @@ font-size:16px;
 cursor:pointer;
 }
 
-/* ===== MAIN STORY SCREEN ===== */
-
+/* STORY SCREEN */
 #story{
 display:none;
 position:fixed;
@@ -70,10 +67,9 @@ background-size:cover;
 background-position:center;
 }
 
-/* ===== CARD ===== */
-
+/* CARD */
 .card{
-width:min(90vw,380px);
+width:min(92vw,380px);
 background:#fffaf0;
 padding:22px;
 border-radius:12px;
@@ -81,8 +77,20 @@ text-align:center;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* ===== ENVELOPE ===== */
+/* GREETING TEXT (RESTORED) */
+.intro{
+font-size:17px;
+color:#000;
+line-height:1.5;
+margin-bottom:10px;
+}
 
+.eng{
+font-size:14px;
+color:#333;
+}
+
+/* ENVELOPE */
 .envelope{
 width:130px;
 height:85px;
@@ -109,8 +117,7 @@ transition:1s;
 transform:rotateX(180deg);
 }
 
-/* ===== MESSAGES ===== */
-
+/* MESSAGES */
 .msg{
 opacity:0;
 transform:translateY(10px);
@@ -131,8 +138,7 @@ color:#b30000;
 font-weight:700;
 }
 
-/* ===== FLOWERS ===== */
-
+/* FLOWERS */
 .flower{
 position:fixed;
 top:-10px;
@@ -165,8 +171,24 @@ to{transform:translateY(110vh);}
 
 <div class="card">
 
+<!-- RESTORED GREETING BLOCK -->
+<div class="intro">
+
+নমস্কার প্রিয়জন<br>
+<span class="eng">(Nomoshkaar Priyojon)</span><br><br>
+
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br>
+<span class="eng">(Respect & love)</span><br><br>
+
+চিঠিটিতে চাপ দিন<br>
+<span class="eng">(Tap the letter)</span>
+
+</div>
+
+<!-- ENVELOPE -->
 <div class="envelope" id="env" onclick="openLetter()"></div>
 
+<!-- MESSAGES -->
 <div id="m1" class="msg">নতুন আলো আসুক জীবনে<br>(New light in life)</div>
 <div id="m2" class="msg">হাসি আর ভালোবাসা থাকুক<br>(Happiness & love)</div>
 <div id="m3" class="msg">স্বপ্নগুলো বড় হোক<br>(Bigger dreams)</div>
@@ -179,6 +201,25 @@ to{transform:translateY(110vh);}
 <script>
 
 let song=document.getElementById("song");
+
+/* START */
+function start(){
+
+document.getElementById("landing").style.opacity="0";
+
+setTimeout(()=>{
+document.getElementById("landing").style.display="none";
+document.getElementById("story").style.display="flex";
+},800);
+
+/* music */
+song.currentTime=42;
+song.volume=0.35;
+song.play().catch(()=>{});
+
+/* flowers */
+createFlowers();
+}
 
 /* FLOWERS */
 function createFlowers(){
@@ -198,28 +239,7 @@ document.body.appendChild(f);
 setTimeout(()=>f.remove(),9000);
 }
 
-/* START */
-
-function start(){
-
-document.getElementById("landing").style.opacity="0";
-
-setTimeout(()=>{
-document.getElementById("landing").style.display="none";
-document.getElementById("story").style.display="flex";
-},800);
-
-/* music */
-song.currentTime=42;
-song.volume=0.35;
-song.play().catch(()=>{});
-
-/* flowers */
-createFlowers();
-}
-
 /* ENVELOPE FLOW */
-
 let opened=false;
 
 function openLetter(){
@@ -230,7 +250,7 @@ opened=true;
 const env=document.getElementById("env");
 env.classList.add("open");
 
-/* messages with chain timing */
+/* messages */
 let msgs=["m1","m2","m3","m4"];
 
 msgs.forEach((id,i)=>{
@@ -239,11 +259,9 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* AUTO CLOSE AFTER LAST MESSAGE */
+/* AUTO CLOSE */
 setTimeout(()=>{
-
 env.classList.remove("open");
-
 },1200*msgs.length + 1200);
 
 }
