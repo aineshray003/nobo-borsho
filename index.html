@@ -212,15 +212,23 @@ let song=document.getElementById("song");
 let userName="প্রিয়জন";
 
 /* START */
-function start(){
+song.currentTime = 42;
+song.volume = 0.35;
 
-let input=document.getElementById("nameInput");
-if(input.value.trim()!==""){
-userName=input.value.trim();
+let playPromise = song.play();
+
+if (playPromise !== undefined) {
+playPromise
+.then(() => {
+console.log("music playing");
+})
+.catch(() => {
+console.log("autoplay blocked - retrying");
+document.addEventListener("click", () => {
+song.play();
+}, { once: true });
+});
 }
-
-document.getElementById("landing").style.display="none";
-document.getElementById("story").style.display="flex";
 
 /* MUSIC */
 song.currentTime=42;
