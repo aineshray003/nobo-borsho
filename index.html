@@ -273,19 +273,38 @@ Click Here
 
 <script>
 
-let dhaak=document.getElementById("dhaak")
-let song=document.getElementById("song")
+let dhaakStarted = false;
 
-window.onload=function(){
+function playDhaak(){
 
-dhaak.currentTime=275
-dhaak.volume=0.2
-dhaak.play()
+if(dhaakStarted) return;
+dhaakStarted = true;
 
+dhaak.currentTime = 275; // 04:35
+dhaak.volume = 0.2;
+
+let playPromise = dhaak.play();
+
+if(playPromise !== undefined){
+playPromise.catch(()=>{
+
+// fallback if browser blocks it
+document.addEventListener("click", resumeDhaakOnce, { once:true });
+
+});
 }
+
+setTimeout(fadeDhaak, 3000);
+}
+
+function resumeDhaakOnce(){
+dhaak.play();
+setTimeout(fadeDhaak, 3000);
+}}
 
 /* CLICK BUTTON */
 
+  playDhaak();
 function startGreeting(){
 
 let landing=document.getElementById("landing")
