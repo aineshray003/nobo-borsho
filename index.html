@@ -116,6 +116,7 @@ background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
 border-radius:6px;
 cursor:pointer;
 position:relative;
+z-index:10;
 overflow:visible;
 }
 
@@ -135,28 +136,29 @@ transform-origin:top;
 transform:rotateX(180deg);
 }
 
-/* 🔴 WAX STAMP */
+/* WAX SEAL FIXED */
 
 .wax{
 position:absolute;
 width:28px;
 height:28px;
-background:#b30000;
+background:radial-gradient(circle at 30% 30%, #ff4d4d, #990000);
 border-radius:50%;
-bottom:10px;
+bottom:8px;
 left:50%;
 transform:translateX(-50%) scale(0);
-box-shadow:0 0 10px rgba(179,0,0,0.6);
+z-index:9999;
+box-shadow:0 0 12px rgba(179,0,0,0.8);
 }
 
 .wax.animate{
-animation:waxPop 1.2s ease forwards;
+animation:waxPop 0.9s ease forwards;
 }
 
 @keyframes waxPop{
 0%{transform:translateX(-50%) scale(0);}
-60%{transform:translateX(-50%) scale(1.4);}
-100%{transform:translateX(-50%) scale(1);}
+60%{transform:translateX(-50%) scale(1.6);}
+100%{transform:translateX(-50%) scale(1.2);}
 }
 
 /* MESSAGES */
@@ -284,7 +286,7 @@ document.getElementById("greeting").style.display="flex";
 
 }
 
-/* FADE AUDIO */
+/* AUDIO FADE */
 
 function fadeAudio(audio){
 let f=setInterval(()=>{
@@ -322,12 +324,14 @@ document.getElementById(id).classList.add("show");
 },1500*(i+1));
 });
 
-/* 🔴 WAX SEAL ANIMATION (NEW ADDITION ONLY) */
+/* wax seal FIXED */
 setTimeout(()=>{
 wax.classList.add("animate");
 },1500*(ids.length));
 
 }
+
+/* FLOWERS */
 
 function createFlowers(){
 
