@@ -214,9 +214,9 @@ let song=document.getElementById("song");
 let dhaak=document.getElementById("dhaak");
 
 let userName="প্রিয়জন";
-let audioReady=false;
+let opened=false;
 
-/* START FUNCTION */
+/* START */
 function start(){
 
 let input=document.getElementById("nameInput");
@@ -230,15 +230,15 @@ document.getElementById("story").style.display="flex";
 /* FLOWERS */
 createFlowers();
 
-/* SONG (safe play) */
-song.volume=0.35;
-song.currentTime=42;
+/* 🔥 DHAK START (ONLY HERE) */
+dhaak.volume=0.2;
+dhaak.currentTime=275;
 
-song.play().catch(()=>{});
-
-/* IMPORTANT: prepare dhaak but DO NOT play yet */
-dhaak.load();
-audioReady=true;
+dhaak.play().catch(()=>{
+document.addEventListener("click", () => {
+dhaak.play();
+}, { once:true });
+});
 
 }
 
@@ -263,44 +263,24 @@ setTimeout(()=>f.remove(),9000);
 }
 
 /* ENVELOPE */
-let opened=false;
-
 function openLetter(){
 
 if(opened) return;
 opened=true;
 
-const env=document.getElementById("env");
-env.classList.add("open");
+/* 🔥 STOP DHAK */
+dhaak.pause();
+dhaak.currentTime=0;
 
-/* 🔥 DHAK ONLY STARTS ON USER CLICK */
-if(audioReady){
+/* 🔥 START RABINDRA */
+song.volume=0.35;
+song.currentTime=42;
+song.play().catch(()=>{});
 
-dhaak.volume=0.2;
+/* OPEN ANIMATION */
+document.getElementById("env").classList.add("open");
 
-/* wait until fully loaded */
-dhaak.addEventListener("canplaythrough", () => {
-
-try {
-dhaak.currentTime = 275; // 4:35
-
-let p = dhaak.play();
-
-if(p !== undefined){
-p.catch(()=> {
-console.log("dhaak blocked");
-});
-}
-
-} catch(e){
-console.log(e);
-}
-
-}, { once:true });
-
-}
-
-/* messages */
+/* MESSAGES */
 let msgs=["m1","m2","m3"];
 
 msgs.forEach((id,i)=>{
@@ -309,7 +289,7 @@ document.getElementById(id).classList.add("show");
 },1200*(i+1));
 });
 
-/* final */
+/* FINAL MESSAGE */
 setTimeout(()=>{
 
 document.getElementById("finalMsg").innerHTML =
