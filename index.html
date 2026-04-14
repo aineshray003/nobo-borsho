@@ -22,17 +22,26 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#f6f1e7;
 font-family:'Noto Serif Bengali', serif;
 overflow:hidden;
+
+/* faded background image */
+
+background-image:
+linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.55)),
+url("preview.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 }
 
 /* parchment card */
 
 .card{
-background:#fffaf0;
+background:rgba(255,250,240,0.95);
 border:3px solid #b22222;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 padding:50px;
 width:420px;
 text-align:center;
@@ -91,7 +100,7 @@ margin-bottom:20px;
 
 .instruction{
 font-size:14px;
-color:#555;
+color:#444;
 margin-bottom:10px;
 }
 
@@ -147,7 +156,7 @@ opacity:1;
 
 .eng{
 font-size:14px;
-color:#555;
+color:#444;
 }
 
 .final{
@@ -169,8 +178,6 @@ transform:scale(1.08);
 <audio id="song" src="rabindra.mp3" loop></audio>
 
 <div class="card">
-
-<!-- alpana -->
 
 <svg class="alpana top" viewBox="0 0 200 200">
 <path d="M100 30 C130 60,130 140,100 170 C70 140,70 60,100 30
