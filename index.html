@@ -8,10 +8,6 @@
 
 <title>Shubho Nobo Borsho</title>
 
-<meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
-<meta property="og:description" content="Tap to open a Bengali New Year greeting 🌸">
-<meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -34,10 +30,9 @@ flex-direction:column;
 align-items:center;
 justify-content:flex-start;
 text-align:center;
-
 padding-top:45vh;
 
-background-image:
+background:
 linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),
 url("landing.jpg");
 
@@ -60,7 +55,7 @@ height:100vh;
 justify-content:center;
 align-items:center;
 
-background-image:
+background:
 linear-gradient(rgba(255,255,255,0.25),rgba(255,255,255,0.25)),
 url("preview.jpg");
 
@@ -78,6 +73,7 @@ border:3px solid #b22222;
 text-align:center;
 box-shadow:0 12px 30px rgba(0,0,0,0.35);
 border-radius:10px;
+position:relative;
 }
 
 /* TEXT */
@@ -85,7 +81,6 @@ border-radius:10px;
 .intro{
 font-size:18px;
 color:#000;
-margin-bottom:15px;
 }
 
 .eng{
@@ -95,8 +90,7 @@ color:#333;
 
 .instruction{
 font-size:14px;
-color:#000;
-margin-bottom:10px;
+margin-top:10px;
 }
 
 /* BUTTON */
@@ -118,9 +112,9 @@ width:130px;
 height:85px;
 margin:20px auto;
 background:linear-gradient(145deg,#9e1c1c,#b22222,#7a1212);
+border-radius:6px;
 cursor:pointer;
 position:relative;
-border-radius:6px;
 }
 
 .envelope:before{
@@ -149,14 +143,44 @@ font-size:20px;
 color:#000;
 }
 
-.show{
-opacity:1;
-}
+.show{opacity:1;}
 
 .final{
 font-size:28px;
 color:#b30000;
 font-weight:700;
+animation:glow 2s infinite ease-in-out;
+}
+
+@keyframes glow{
+0%,100%{text-shadow:0 0 5px #ffcccc;}
+50%{text-shadow:0 0 20px #ff6666;}
+}
+
+/* FLOWERS */
+
+.flower{
+position:absolute;
+top:-10px;
+font-size:18px;
+animation:fall linear infinite;
+pointer-events:none;
+z-index:999;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+
+/* ALPANA */
+
+.alpana{
+position:absolute;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:1;
+opacity:0.6;
 }
 
 </style>
@@ -167,24 +191,17 @@ font-weight:700;
 
 <audio id="dhaak" src="dhaak.mp3"></audio>
 <audio id="song" src="rabindra.mp3" loop></audio>
+<audio id="paper" src="paper.mp3"></audio>
 
 <!-- LANDING -->
 
 <div id="landing">
 
-<h2 style="color:black;">
-নমস্কার<br>
-<span class="eng">(Greetings)</span>
-</h2>
+<h2 style="color:black;">নমস্কার<br><span class="eng">(Greetings)</span></h2>
 
-<p style="color:black;">
-পয়লা বৈশাখের ছোট্ট শুভেচ্ছা<br>
-<span class="eng">(A small Poila Boishakh greeting)</span>
-</p>
+<p style="color:black;">পয়লা বৈশাখের শুভেচ্ছা<br><span class="eng">(Poila Boishakh wishes)</span></p>
 
-<button class="startBtn" onclick="startGreeting()">
-Click Here
-</button>
+<button class="startBtn" onclick="startGreeting()">Click Here</button>
 
 </div>
 
@@ -195,43 +212,21 @@ Click Here
 <div class="card">
 
 <div class="intro">
-
-নমস্কার প্রিয়জন<br>
-<span class="eng">(Nomoshkaar Priyojon)</span>
-
-<br><br>
-
-বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br>
-<span class="eng">(Respect to elders, love to younger ones)</span>
-
+নমস্কার প্রিয়জন<br><span class="eng">(Nomoshkaar Priyojon)</span><br><br>
+বড়দেরকে প্রণাম, ছোটদেরকে ভালোবাসা<br><span class="eng">(Respect & love)</span>
 </div>
 
-<p class="instruction">
-চিঠিটিতে চাপ দিন<br>
-<span class="eng">(Tap the letter)</span>
-</p>
+<p class="instruction">চিঠিটিতে চাপ দিন<br><span class="eng">(Tap the letter)</span></p>
 
 <div id="env" class="envelope" onclick="openLetter()"></div>
 
-<div id="m1" class="message">
-নতুন আলো আসুক জীবনে<br>
-<span class="eng">(May new light enter your life)</span>
-</div>
+<div id="m1" class="message">নতুন আলো আসুক জীবনে<br><span class="eng">(New light in life)</span></div>
 
-<div id="m2" class="message">
-হাসি আর ভালোবাসা থাকুক সবদিন<br>
-<span class="eng">(May laughter and love stay always)</span>
-</div>
+<div id="m2" class="message">হাসি আর ভালোবাসা থাকুক<br><span class="eng">(Happiness & love)</span></div>
 
-<div id="m3" class="message">
-স্বপ্নগুলো হোক আরও বড়<br>
-<span class="eng">(May your dreams grow bigger)</span>
-</div>
+<div id="m3" class="message">স্বপ্নগুলো বড় হোক<br><span class="eng">(Bigger dreams)</span></div>
 
-<div id="m4" class="message final">
-শুভ নববর্ষ 🌸<br>
-<span class="eng">(Shubho Nobo Borsho)</span>
-</div>
+<div id="m4" class="message final">শুভ নববর্ষ 🌸<br><span class="eng">(Happy New Year)</span></div>
 
 </div>
 
@@ -239,90 +234,148 @@ Click Here
 
 <script>
 
-let dhaak = document.getElementById("dhaak");
-let song = document.getElementById("song");
+let dhaak=document.getElementById("dhaak");
+let song=document.getElementById("song");
+let paper=document.getElementById("paper");
 
-let dhaakStarted = false;
+let dhaakStarted=false;
 
-/* MAIN BUTTON */
+/* LANDING → GREETING */
 
 function startGreeting(){
 
-let landing = document.getElementById("landing");
-
+let landing=document.getElementById("landing");
 landing.classList.add("zoomOut");
 
-/* START DHAK ONLY ON USER CLICK (FIXES ALL ISSUES) */
+/* DHAK */
 if(!dhaakStarted){
-dhaakStarted = true;
-
-dhaak.currentTime = 275; // 04:35
-dhaak.volume = 0.2;
-
+dhaakStarted=true;
+dhaak.currentTime=275;
+dhaak.volume=0.2;
 dhaak.play().catch(()=>{});
-
-setTimeout(fadeDhaak, 3000);
+setTimeout(()=>fadeAudio(dhaak),3000);
 }
 
-setTimeout(function(){
+/* ALPANA */
+drawAlpana();
+
+setTimeout(()=>{
 landing.style.display="none";
 document.getElementById("greeting").style.display="flex";
 },900);
-
 }
 
-/* DHAK FADE */
+/* FADE AUDIO */
 
-function fadeDhaak(){
-
-let fade = setInterval(()=>{
-
-if(dhaak.volume > 0.02){
-dhaak.volume -= 0.02;
-}else{
-dhaak.pause();
-clearInterval(fade);
-}
-
+function fadeAudio(audio){
+let f=setInterval(()=>{
+if(audio.volume>0.02) audio.volume-=0.02;
+else {audio.pause();clearInterval(f);}
 },120);
-
 }
 
 /* ENVELOPE */
 
-let opened = false;
+let opened=false;
 
 function openLetter(){
 
 if(opened) return;
-opened = true;
+opened=true;
 
 document.getElementById("env").classList.add("open");
 
-/* RABINDRA SANGEET */
-song.currentTime = 42;
-song.volume = 0.35;
+/* PAPER SOUND */
+paper.play().catch(()=>{});
+
+/* SONG */
+song.currentTime=42;
+song.volume=0.35;
 song.play();
 
-/* MESSAGE REVEAL */
-let ids = ["m1","m2","m3","m4"];
+/* TEXT REVEAL */
+let ids=["m1","m2","m3","m4"];
 
 ids.forEach((id,i)=>{
-
 setTimeout(()=>{
-
 document.getElementById(id).classList.add("show");
-
 },1500*(i+1));
-
 });
 
 setTimeout(()=>{
-
 document.getElementById("env").classList.remove("open");
-
 },8000);
+}
 
+/* FLOWERS */
+
+function createFlowers(){
+
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌼";
+
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(4+Math.random()*5)+"s";
+
+document.body.appendChild(f);
+}
+
+}
+
+createFlowers();
+
+/* FLOWER TAP BURST */
+
+document.addEventListener("click",function(e){
+
+for(let i=0;i<6;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌼";
+
+f.style.left=e.clientX+"px";
+f.style.top=e.clientY+"px";
+f.style.position="absolute";
+f.style.animationDuration="1.5s";
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),1500);
+}
+
+});
+
+/* ALPANA */
+
+function drawAlpana(){
+
+let canvas=document.createElement("canvas");
+canvas.className="alpana";
+document.getElementById("greeting").appendChild(canvas);
+
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let t=0;
+
+function animate(){
+t+=0.01;
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.beginPath();
+ctx.arc(canvas.width/2,canvas.height/2,120+Math.sin(t)*5,0,Math.PI*2);
+ctx.strokeStyle="rgba(178,34,34,0.4)";
+ctx.lineWidth=2;
+ctx.stroke();
+
+requestAnimationFrame(animate);
+}
+
+animate();
 }
 
 </script>
