@@ -7,7 +7,6 @@
 
 <title>Shubho Nobo Borsho</title>
 
-<!-- Social Preview -->
 <meta property="og:title" content="শুভ নববর্ষ (Shubho Nobo Borsho)">
 <meta property="og:description" content="A small Bengali New Year letter for you 🌸 Tap to open.">
 <meta property="og:image" content="https://aineshray003.github.io/nobo-borsho/preview.jpg">
@@ -40,6 +39,8 @@ rgba(255,255,255,0.80)
 );
 z-index:0;
 }
+
+/* landing page */
 
 #landing{
 position:absolute;
@@ -77,12 +78,16 @@ cursor:pointer;
 box-shadow:0 6px 12px rgba(0,0,0,0.3);
 }
 
+/* greeting page */
+
 #greeting{
 display:none;
 height:100vh;
 justify-content:center;
 align-items:center;
 }
+
+/* card */
 
 .card{
 background:rgba(255,250,240,0.96);
@@ -105,6 +110,8 @@ margin-bottom:20px;
 font-size:14px;
 color:#444;
 }
+
+/* envelope */
 
 .envelope{
 width:130px;
@@ -155,6 +162,8 @@ color:#b22222;
 font-weight:600;
 }
 
+/* falling shiuli flowers */
+
 .flower{
 position:absolute;
 top:-10px;
@@ -173,8 +182,10 @@ to{transform:translateY(110vh);}
 
 <body>
 
-<audio id="song" src="rabindra.mp3" loop></audio>
-<audio id="dhaak" src="dhaak.mp3"></audio>
+<audio id="song" src="rabindra.mp3" loop preload="auto"></audio>
+<audio id="dhaak" src="dhaak.mp3" preload="auto"></audio>
+
+<!-- landing screen -->
 
 <div id="landing">
 
@@ -186,6 +197,8 @@ Click Here
 </button>
 
 </div>
+
+<!-- greeting page -->
 
 <div id="greeting">
 
@@ -234,6 +247,8 @@ Tap the letter 💌
 
 <script>
 
+/* landing switch */
+
 function startGreeting(){
 document.getElementById("landing").style.display="none"
 document.getElementById("greeting").style.display="flex"
@@ -252,13 +267,22 @@ let dhaak=document.getElementById("dhaak")
 
 env.classList.add("open")
 
-dhaak.volume=0.20
-dhaak.currentTime=274
+/* DHAK STARTS AT 04:35 */
+
+dhaak.volume = 0.20
+
+dhaak.addEventListener("loadedmetadata", function(){
+dhaak.currentTime = 275
 dhaak.play()
+})
+
+/* RABINDRA SANGEET */
 
 song.volume=0.35
 song.currentTime=42
 song.play()
+
+/* messages appear */
 
 let msgs=["m1","m2","m3","m4"]
 
@@ -270,20 +294,26 @@ document.getElementById(id).classList.add("show")
 
 })
 
+/* envelope closes */
+
 setTimeout(()=>{
 env.classList.remove("open")
 },8000)
 
 }
 
+/* shiuli flowers */
+
 for(let i=0;i<16;i++){
 
 let flower=document.createElement("div")
 
 flower.classList.add("flower")
+
 flower.innerHTML="🌼"
 
 flower.style.left=Math.random()*100+"vw"
+
 flower.style.animationDuration=(5+Math.random()*5)+"s"
 
 document.body.appendChild(flower)
